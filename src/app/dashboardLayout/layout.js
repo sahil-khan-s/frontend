@@ -6,6 +6,7 @@ const CommonLayout = ({ children }) => {
     <div style={{ display: 'flex' }}>
         <Sidebar />
       <main>{children}</main>
+      
     </div>
   );
 };
