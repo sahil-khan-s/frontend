@@ -12,7 +12,7 @@ const page = () => {
         <div className='mt-16 ml-40'>
         <PracticeNow/>
         </div>
-     
+      <h1 className='text-center pt-5 pl-28'>No history to Show</h1>
     </div>
     </div>
 
