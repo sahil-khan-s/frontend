@@ -2,7 +2,8 @@
 import React from 'react'
 import { useState } from 'react';
 import PracticeNow from '../common/PracticeNow'
-// import interviewData from "./interview.json" // Import the JSON data
+import search from '../../../../public/assets/images/search.svg'
+import Image from 'next/image';
 const interviewData = require('./interview.json');
 const page = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,31 +32,35 @@ const page = () => {
     'HR',
     'Marketer',
     'Motion',
-    'Project Manager',
-    'UI',
+   
   ];
   return (
-<div className='container'>
-    <div className='px-8 w-[100%]'>
+<div className='container templates mx-auto container 2xl:max-w-container xl:px-[128px] '>
+    <div className='px-8]'>
  <div className=''>
       <h1 className='pt-10 text-3xl font-bold '>
      Templates 
       </h1>
-        <div className='mt-16 ml-60'>
+        <div className='mt-16 w-[630px] mx-auto'>
         <PracticeNow/>
         </div> 
         <div className='pt-14'>
-        <div className="mb-12 w-[340px] mx-auto">
-        <input
-          type="text"
-          placeholder="Search by category "
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className=" py-3 px-5 border border-gray-300 rounded-full focus:outline-none focus:ring focus:border-blue-400"
-        />
+        <div className="mb-12 w-[300px] mx-auto">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search Templates"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400"
+          />
+          <div className="absolute inset-y-0 right-6 flex items-center  pointer-events-none">
+            <Image src={search} alt="Search Icon" height={5} className="w-5 h-5 text-gray-400" />
+          </div>
+        </div>
       </div>
       <div>
-      <div className="mb-4">
+      <div className="mb-4 p-5">
         {categoryButtons.map((buttonText, index) => (
           <button
             key={index}
@@ -70,7 +75,7 @@ const page = () => {
       </div>
       {interviewData.map((category) => (
         filterInterviews(category, searchQuery) && (
-          <div key={category.category} className="grid grid-cols-3">
+          <div key={category.category} className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 gap-4">
             {category.interviews.map((interview, index) => (
               <div key={index} className="card">
                 <button className="btn">{category.category}</button>

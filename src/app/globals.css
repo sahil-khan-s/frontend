@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-drawer-paper {
+    /* Add your styles here, including background color */
+    background: linear-gradient(
+  45deg,
+  #f5f0f0,
+  #a8a8fd,
+  #ede5ec,
+  #c5def2,
+  #efeff1,
+  #eeeff1,
+  #ededf7
+);
+
+
+  }

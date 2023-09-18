@@ -2,9 +2,9 @@ import React from 'react'
 import Sidebar from './common/sidebar'
 import Dashboard from "../dashboardLayout/dashboard/page"
 
-const page = ({children}) => {
+const page = ({}) => {
   return (
-    <div>
+    <div className=''>
       <Sidebar/>
     </div>
    

@@ -18,21 +18,31 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setOpen(!open);
   };
+  
+  const handleNavigation = () => {
+    router.push('/dashboardLayout/dashboard'); // Provide the relative path to the page
+  };
 
   return (
     <>
-    <div className="bg-gray-300">
+    <div className="">
     <Drawer
       variant="permanent"
       anchor="left"
       open={open}
+      classes={{
+        paper: "custom-drawer-paper", // Add your custom class name here
+      }}
+
       sx={{
         width: open ? "270px" : "72px", // Adjust the width as needed
         flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: open ? "270px" : "72px", // Adjust the width as needed
         },
+        
       }}
+
     >
       <div className="">
         <div className="flex px-2 items-center gap-2  mt-4 ">
@@ -41,7 +51,7 @@ const Sidebar = () => {
               <div className="flex space-x-2 items-center cursor-pointer">
                 <Image src={logo} alt="" width={50} height={50} />
                 <Typography variant="body1" sx={{ fontWeight: "bold" , }}>
-                  Interview Buddy
+                  AI Buddy
                 </Typography>
               </div>
             </div>
