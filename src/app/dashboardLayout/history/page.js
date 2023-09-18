@@ -9,10 +9,10 @@ const page = () => {
       <h1 className='pt-10 text-3xl font-bold '>
      History 
       </h1>
-        <div className='mt-16 ml-40'>
+        <div className='mt-16 ml-60'>
         <PracticeNow/>
-        </div>
       <h1 className='text-center pt-5 pl-28'>No history to Show</h1>
+        </div>
     </div>
     </div>
 

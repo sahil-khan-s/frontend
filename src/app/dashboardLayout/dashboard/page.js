@@ -9,7 +9,7 @@ const page = () => {
       <h1 className='pt-10 text-3xl font-bold '>
      Dashboard 
       </h1>
-        <div className='mt-16 ml-40'>
+        <div className='mt-16 ml-60'>
         <PracticeNow/>
         </div>
      
