@@ -1,9 +1,11 @@
 "use client"
 import React from 'react'
+import Link from 'next/link';
 import { useState } from 'react';
 import PracticeNow from '../common/PracticeNow'
 import search from '../../../../public/assets/images/search.svg'
 import Image from 'next/image';
+import { MediaRecorderProvider } from 'react-media-recorder';
 const interviewData = require('./interview.json');
 const page = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,10 +37,11 @@ const page = () => {
    
   ];
   return (
+    
 <div className='container templates mx-auto container 2xl:max-w-container xl:px-[128px] '>
     <div className='px-8]'>
  <div className=''>
-      <h1 className='pt-10 text-3xl font-bold '>
+      <h1 className='pt-10 text-3xl text-start font-bold '>
      Templates 
       </h1>
         <div className='mt-16 w-[630px] mx-auto'>
@@ -46,6 +49,7 @@ const page = () => {
         </div> 
         <div className='pt-14'>
         <div className="mb-12 w-[300px] mx-auto">
+
         <div className="relative">
           <input
             type="text"
@@ -58,8 +62,11 @@ const page = () => {
             <Image src={search} alt="Search Icon" height={5} className="w-5 h-5 text-gray-400" />
           </div>
         </div>
+
       </div>
       <div>
+
+
       <div className="mb-4 p-5">
         {categoryButtons.map((buttonText, index) => (
           <button
@@ -73,6 +80,8 @@ const page = () => {
           </button>
         ))}
       </div>
+
+
       {interviewData.map((category) => (
         filterInterviews(category, searchQuery) && (
           <div key={category.category} className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 gap-4">
@@ -80,12 +89,17 @@ const page = () => {
               <div key={index} className="card">
                 <button className="btn">{category.category}</button>
                 <p className="my-5">{interview}</p>
+                <Link href="/dashboardLayout/templates/takeAnalysis">
                 <button className="practice">Practice Now</button>
+                  
+               </Link>
               </div>
             ))}
           </div>
         )
       ))}
+
+      
       <style jsx>{`
       p{
         font-weight: bold;
