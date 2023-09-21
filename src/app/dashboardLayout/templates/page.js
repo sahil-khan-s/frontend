@@ -90,7 +90,10 @@ const page = () => {
                 <button className="btn">{category.category}</button>
                 <p className="my-5">{interview}</p>
                 <Link href="/dashboardLayout/templates/takeAnalysis">
+                  <div>
                 <button className="practice">Practice Now</button>
+
+                  </div>
                   
                </Link>
               </div>
@@ -122,7 +125,9 @@ const page = () => {
           border: none;
           border-radius: 5px;
           cursor: pointer;
-          padding: 10px 20px
+          padding: 10px 20px;
+          width: 250px
+
         }
         .btn{
           width: 200px;

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useState } from 'react';
-
+import Link from 'next/link';
 const Dropdown = () => {
   const [selectedOption, setSelectedOption] = useState('Software Engineer');
 
@@ -30,12 +30,13 @@ const Dropdown = () => {
         </select>
         {""} can you help me prepare?
       </p>
-
+      <Link href="/dashboardLayout/templates/takeAnalysis">
       <div className='flex justify-center mt-5'>
       <button className='bg-white rounded-lg py-3 px-10'>
         Practice Now <span className='font-medium px-2 text-2xl'>+</span>
       </button>
       </div>
+      </Link>
       
     </div>
   );
