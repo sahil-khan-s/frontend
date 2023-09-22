@@ -19,7 +19,7 @@ btnstyle,
             <div className={`${btnstyle} border-2 rounded-full bg-white py-2 mt-4 max-w-[400px]`}>
                 <form>
               <input style={{border: "none"}} className="border-none  ml-4" type="text" placeholder="Enter your email address" />
-              <Link href="dashboardLayout/dashboard">
+              <Link href="/login">
              <button className=" bg-yellow-400 py-2 px-3 rounded-full">{btnText}</button>
              </Link>
              </form>
