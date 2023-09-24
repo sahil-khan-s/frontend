@@ -19,7 +19,7 @@ function Header() {
         <Link href="/">
           <h1 className=" font-medium">Resources</h1>
         </Link>
-        <Link href="/">
+        <Link href="/login">
           <h1 className=" font-medium">Login</h1>
         </Link>
       </div>
