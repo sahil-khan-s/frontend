@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Response, jsonify , send_file , request ,send_from_directory
 from flask_cors import CORS 
 import os
+from emotion_recognition import detect_emotions
 app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER=os.path.join(os.getcwd(),'database','videos')

@@ -1,1 +1,6 @@
-pip install flask-cors
+
+Flask-Cors >= 4.0.0 
+opencv-python >= 4.7.0.72
+deepface >= 0.0.79
+
+
