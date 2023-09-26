@@ -53,6 +53,19 @@ function Page() {
       .catch((error) => {
         console.error("Error:", error);
       });
+
+    // send a GET request to from Flask backend
+    fetch("http://localhost:5000/emotion_detect", {
+      method: "GET",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message); // Should print "emotion detected" if the Flask endpoint is working
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
   
   

@@ -19,9 +19,9 @@ def detect_emotions(video_path, frame_skip = 5):
         if frame_count % frame_skip == 0:
             result = DeepFace.analyze(frame, actions=['emotion'], 
                                     enforce_detection=False,  
-                                    detector_backend='ssd'
-                                    )
+                                    detector_backend='ssd')
             emotion_scores[result["dominant_emotion"]] += 1
+
         if not ret:
             break
     cap.release()
@@ -29,7 +29,7 @@ def detect_emotions(video_path, frame_skip = 5):
     emotion_results = {}
 
     for emotion, count in emotion_scores.items():
-        score = (count / total_frames) * 10
+        score = (count / 5) * 10
         formatted_score = "{:.2f}".format(score)
         emotion_results[emotion] = formatted_score
 
