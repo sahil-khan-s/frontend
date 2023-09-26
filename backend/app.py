@@ -13,7 +13,8 @@ def download():
     path = os.path.join(app.config['UPLOAD_FOLDER'], 'recorded_video' + '.webm')
     file.save(path)
     response = {'message': 'Video downloaded'}
-    # return jsonify(response)
+    return jsonify(response)
+def detect():
     path_data = 'backend/database'
     for file in os.listdir(path_data):
         video_file = os.path.join(path_data, file)
@@ -22,7 +23,7 @@ def download():
             print(video_path)
     emotions = detect_emotions(video_path)
     print(emotions)
-    response = {'message': 'Video downloaded and emotions detected successfully', 'emotions': emotions}
+    response = {'message': 'Emotions detected successfully', 'emotions': emotions}
     return jsonify(response)
 
 
