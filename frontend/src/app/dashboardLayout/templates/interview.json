@@ -1,0 +1,79 @@
+[
+    {
+      "category": "Backend Developer",
+      "interviews": [
+        "Interview Of Junior Backend Officer",
+        "Interview Of Senior Backend Officer",
+        "Interview Of Mid Level Backend Officer"
+      ]
+    },
+    {
+      "category": "Accounting Officer",
+      "interviews": [
+        "Interview Of Junior Accounting Officer",
+        "Interview Of Senior Accounting Officer",
+        "Interview Of Mid Level Accounting Officer",
+        "Interview Of Junior Accounting Officer3",
+        "Interview Of Junior Accounting Officer5"
+      ]
+    },
+    {
+      "category": "Frontend Developer",
+      "interviews": [
+        "Interview Of Junior Frontend Developer",
+        "Interview Of Senior Frontend Developer",
+        "Interview Of Mid Level Frontend Developer",
+        "Interview Of Expert Frontend Developer"
+      ]
+    },
+    {
+      "category": "Graphics Officer",
+      "interviews": [
+        "Interview Of Senior Graphics Officer",
+        "Interview Of Junior Graphics Officer"
+      ]
+    },
+    {
+      "category": "HR Manager",
+      "interviews": [
+        "Interview Of Junior HR Officer",
+        "Interview Of Senior HR Officer",
+        "Interview Of Expert HR Officer"
+      ]
+    },
+    {
+      "category": "Marketing Officer",
+      "interviews": [
+        "Interview Of Junior Marketer Officer",
+        "Interview Of Expert Marketer Officer",
+        "Interview Of Senior Marketer Officer"
+      ]
+    },
+    {
+      "category": "Motion Graphics",
+      "interviews": [
+        "Interview Of Senior Motion Graphics Candidates",
+        "Interview Of Mid-Level Motion Graphics Candidates",
+        "Interview Of Junior Motion Graphics Candidates"
+      ]
+    },
+    {
+      "category": "Project Manager",
+      "interviews": [
+        "Interview Of Senior Project Manager Officer",
+        "Interview Of Junior Project Manager Officer",
+        "Interview Of Expert Project Manager Officer",
+        "Interview Of Mid Level Project Manager Officer"
+      ]
+    },
+    {
+      "category": "UI Designer",
+      "interviews": [
+        "Interview Of Junior UI/UX Designer",
+        "Interview Of Senior UI/UX Designer",
+        "Interview Of Mid-Level UI/UX Designer",
+        "Interview Of Expert UI/UX Designer"
+      ]
+    }
+  ]
+  
