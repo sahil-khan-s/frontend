@@ -15,16 +15,20 @@ def download():
     response = {'message': 'Video downloaded'}
     return jsonify(response)
 
-@app.route('/detect', methods=['GET'])
-def detect():
-    video_path = os.path.join(app.config['UPLOAD_FOLDER'], 'recorded_video.webm')
-    if os.path.exists(video_path):
-        emotions = detect_emotions(video_path)
-        print("Detected Emotions:", emotions)
-        response = {'message': 'Emotions detected successfully', 'emotions': emotions}
-    else:
-        response = {'error': 'No video found for emotion detection'}
-    return jsonify(response)
+# @app.route('/detect', methods=['GET'])
+# def detect():
+database_path = "/interview-buddy/backend/database"
+for file in os.walk (database_path):
+    video_file = os.path.join(database_path , file)
+    for video in os.listdir(video_file):
+        if video.endswith(".mp4","aei","avi"):
+            video_path = os.path.join(video_file,video)
+            emotions=detect_emotions(video_path)
+            print(emotions)
+    # response = {'message': 'Emotions detected successfully', 'emotions': emotions}
+# else:
+    # response = {'error': 'No video found for emotion detection'}
+# return jsonify(response)
 
 
 if __name__ == '__main__':
