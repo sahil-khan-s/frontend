@@ -35,4 +35,3 @@ def detect_emotions(video_path, frame_skip = 5):
 
     emotion_json = json.dumps(emotion_results)
     return emotion_json
-    
