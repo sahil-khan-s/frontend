@@ -14,8 +14,8 @@ def download():
         path = os.path.join(app.config['UPLOAD_FOLDER'], 'recorded_video' + '.webm')
         file.save(path)
 
-        emotions = detect_emotions(path)
-        response = {'message': 'Video downloaded and emotions detected successfully', 'emotions': emotions}
+        # emotions = detect_emotions(path)
+        response = {'message': 'Video downloaded and emotions detected successfully'}
         return jsonify(response)
     else:
         response = {'message': 'No file uploaded'}
