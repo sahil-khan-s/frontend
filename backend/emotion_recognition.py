@@ -29,10 +29,10 @@ def detect_emotions(video_path, frame_skip = 5):
     emotion_results = {}
 
     for emotion, count in emotion_scores.items():
-        score = (count / (total_frames // 5)) * 10
+        score = (count / total_frames) * 10
         formatted_score = "{:.2f}".format(score)
         emotion_results[emotion] = formatted_score
 
     emotion_json = json.dumps(emotion_results)
     return emotion_json
-
+    
