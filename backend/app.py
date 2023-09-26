@@ -12,9 +12,7 @@ def download():
     file = request.files['video']
     path=os.path.join(app.config['UPLOAD_FOLDER'], 'recorded_video'+'.webm')
     file.save(path)
-    detect_emo = detect_emotions(path)
-
-    response = {'message': "video downloaded successfully", }
+    response = {'message': "video downloaded successfully"}
     return jsonify(response)
 
 if __name__ == '__main__':
