@@ -10,16 +10,20 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/download', methods = ['POST'])
 def download():
     file = request.files['video']
-    if file:
-        path = os.path.join(app.config['UPLOAD_FOLDER'], 'recorded_video' + '.webm')
-        file.save(path)
-
-        # emotions = detect_emotions(path)
-        response = {'message': 'Video downloaded and emotions detected successfully'}
-        return jsonify(response)
-    else:
-        response = {'message': 'No file uploaded'}
-        return jsonify(response), 400
+    path = os.path.join(app.config['UPLOAD_FOLDER'], 'recorded_video' + '.webm')
+    file.save(path)
+    response = {'message': 'Video downloaded'}
+    # return jsonify(response)
+    path_data = 'backend/database'
+    for file in os.listdir(path_data):
+        video_file = os.path.join(path_data, file)
+        for video in os.listdir(video_file):
+            video_path = os.path.join(video_file, video)
+            print(video_path)
+    emotions = detect_emotions(video_path)
+    print(emotions)
+    response = {'message': 'Video downloaded and emotions detected successfully', 'emotions': emotions}
+    return jsonify(response)
 
 
 if __name__ == '__main__':
