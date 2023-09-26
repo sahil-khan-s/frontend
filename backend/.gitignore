@@ -1,0 +1,28 @@
+# Byte-compiled / optimized Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# IDE specific files (e.g., PyCharm, VS Code)
+.idea/
+.vscode/
+
+# Logs
+logs/
+
+# Environment-specific files
+.env
+
+# Ignore database files (SQLite, PostgreSQL, etc.) if they are stored in the project directory
+*.db
+
+# Ignore generated files and directories
+__pycache__/
+instance/
+.cache/
+.pytest_cache/
