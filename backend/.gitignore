@@ -27,3 +27,6 @@ __pycache__/
 instance/
 .cache/
 .pytest_cache/
+
+# videos
+/videos

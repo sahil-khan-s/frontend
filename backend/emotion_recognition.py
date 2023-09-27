@@ -8,7 +8,15 @@ def detect_emotions(video_path, frame_skip = 5):
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     frame_count = 0
 
-    emotion_scores = {'neutral': 0, 'happy': 0, 'surprise': 0, 'angry': 0, 'disgust': 0, 'fear': 0, 'sad': 0 }
+    emotion_scores = {
+                        'neutral': 0, 
+                        'happy': 0,
+                        'surprise': 0, 
+                        'angry': 0, 
+                        'disgust': 0, 
+                        'fear': 0, 
+                        'sad': 0 
+                    }
 
     while True:
         ret, frame = cap.read()
@@ -30,7 +38,7 @@ def detect_emotions(video_path, frame_skip = 5):
     emotion_results = {}
 
     for emotion, count in emotion_scores.items():
-        score = (count / total_frames) * 10
+        score = (count / 5) * 10
         formatted_score = "{:.2f}".format(score)
         emotion_results[emotion] = formatted_score
 
