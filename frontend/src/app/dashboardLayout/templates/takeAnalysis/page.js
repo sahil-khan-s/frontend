@@ -32,15 +32,15 @@ function Page() {
       console.error("No recorded video to send.");
       return;
     }
-  
+
     // Fetch the recorded video as a Blob
     const response = await fetch(mediaBlobUrl);
     const blob = await response.blob();
-  
+
     // Create a FormData object and append the Blob
     const formData = new FormData();
     formData.append("video", blob, "recorded_video.webm");
-  
+
     // Send a POST request to your Flask backend
     fetch("http://localhost:5000/download", {
       method: "POST",
@@ -54,6 +54,7 @@ function Page() {
         console.error("Error:", error);
       });
 
+<<<<<<< HEAD
     // send a GET request to from Flask backend
     fetch("http://localhost:5000/emotion_detect", {
       method: "GET",
@@ -62,14 +63,24 @@ function Page() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message); // Should print "emotion detected" if the Flask endpoint is working
+=======
+      
+    fetch("http://localhost:5000/detect", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          console.error("Error:", data.error);
+        } else {
+          console.log("Detected Emotions:", data.emotions);
+        }
+>>>>>>> f0eaaa2c6d8b041683b9f2584ade3ba96825fd1f
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-  
-  
-  
 
   return (
     <div className="pt-4">
@@ -119,11 +130,9 @@ function Page() {
           <button
             onClick={handleSend}
             className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-4 rounded `}
-            
           >
             Send
           </button>
-          
         </>
       ) : (
         <p>
