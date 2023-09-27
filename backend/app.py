@@ -16,6 +16,7 @@ def download():
     response = {'message': 'Video downloaded'}
     return jsonify(response)
 
+# for emotion recognition send output to frontend
 @app.route('/emotion_detect', methods=['GET'])
 def emotion_detect():
     database_path = 'C:\\Users\\never\\Desktop\\web-site-development\\backend\\database'
@@ -29,8 +30,10 @@ def emotion_detect():
             # print("Detected Emotions:", emotions)
     response = {'message': 'Emotions detected successfully', 'emotions': emotions}
     return jsonify(response)
+
+# for gaze tracking send output to frontend
 @app.route('/gaze_detect', methods=['GET'])
-def gaze_detection():
+def gaze_detect():
     database_path = 'C:\\Users\\never\\Desktop\\web-site-development\\backend\\database'
     for file in os.listdir(database_path):
         video_file = os.path.join(database_path, file)
@@ -39,8 +42,7 @@ def gaze_detection():
             if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
                 tracking = gaze_detection(video_path)
             
-        
-    response = {'message': 'Gaze tracking detected successfully', 'gaze_tracking': }
+    response = {'message': 'Gaze tracking detected successfully', 'gaze_tracking': tracking}
     return jsonify(response)
 
 if __name__ == '__main__':
