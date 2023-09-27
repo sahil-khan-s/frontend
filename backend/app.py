@@ -17,7 +17,7 @@ def download():
 
 @app.route('/detect', methods=['GET'])
 def detect():
-
+    
     database_path = 'D:\\Development\\interview-buddy\\backend\\database'
     for file in os.listdir(database_path):
         video_file = os.path.join(database_path, file)
