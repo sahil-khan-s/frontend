@@ -19,9 +19,10 @@ def detect_emotions(video_path, frame_skip = 5):
         if frame_count % frame_skip == 0:
             result = DeepFace.analyze(frame, actions=['emotion'], 
                                     enforce_detection=False,  
-                                    detector_backend='ssd')
-            emotion_scores[result["dominant_emotion"]] += 1
-
+                                    detector_backend='ssd'
+                                    )
+            emotion_scores[result[0]["dominant_emotion"]] += 1
+            # print(result[0]["dominant_emotion"])
         if not ret:
             break
     cap.release()
@@ -35,4 +36,3 @@ def detect_emotions(video_path, frame_skip = 5):
 
     emotion_json = json.dumps(emotion_results)
     return emotion_json
-    
