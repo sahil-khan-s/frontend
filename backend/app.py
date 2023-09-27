@@ -2,7 +2,7 @@ from flask import Flask, render_template, Response, jsonify , send_file , reques
 from flask_cors import CORS 
 import os
 from emotion_recognition import detect_emotions
-# from Gaze_recognition import gaze_detection
+from Gaze_recognition import gaze_detection
 app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER=os.path.join(os.getcwd(),'database','videos')
