@@ -21,7 +21,8 @@ def detect_emotions(video_path, frame_skip = 5):
                                     enforce_detection=False,  
                                     detector_backend='ssd'
                                     )
-            emotion_scores[result["dominant_emotion"]] += 1
+            emotion_scores[result[0]["dominant_emotion"]] += 1
+            # print(result[0]["dominant_emotion"])
         if not ret:
             break
     cap.release()

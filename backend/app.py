@@ -26,7 +26,7 @@ for file in os.listdir(database_path):
         if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
             emotions = detect_emotions(video_path)
         
-            print("Detected Emotions:", emotions)
+        print("Detected Emotions:", emotions)
     # response = {'message': 'Emotions detected successfully', 'emotions': emotions}
     # return jsonify(response)
 
