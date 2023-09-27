@@ -40,7 +40,7 @@ def gaze_detection():
                 tracking = gaze_detection(video_path)
             
         
-    response = {'message': 'Gaze tracking detected successfully', 'gaze_tracking': tracking}
+    response = {'message': 'Gaze tracking detected successfully', 'gaze_tracking': }
     return jsonify(response)
 
 if __name__ == '__main__':

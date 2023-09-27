@@ -2,7 +2,7 @@ import cv2
 import json
 from gaze_tracking import GazeTracking
 
-# def gaze_detection(video_path)
+def gaze_detection(video_path)
 gaze = GazeTracking()
 video = 'C:/Users/never/Desktop/web-site-development/backend/database/videos/recorded_video.webm'
 webcam = cv2.VideoCapture(video)
