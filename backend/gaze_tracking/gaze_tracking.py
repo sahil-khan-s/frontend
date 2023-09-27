@@ -39,17 +39,28 @@ class GazeTracking(object):
         except Exception:
             return False
 
+
     def _analyze(self):
         """Detects the face and initialize Eye objects"""
+
+        # Check if the frame variable is empty
+        if self.frame is None:
+            return
+
+        # Convert the frame to grayscale
         frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
+
+        # Detect the face in the frame
         faces = self._face_detector(frame)
 
-        try:
+        # If a face is detected, initialize the Eye objects
+        if len(faces) > 0:
             landmarks = self._predictor(frame, faces[0])
             self.eye_left = Eye(frame, landmarks, 0, self.calibration)
             self.eye_right = Eye(frame, landmarks, 1, self.calibration)
 
-        except IndexError:
+        # Otherwise, set the Eye objects to None
+        else:
             self.eye_left = None
             self.eye_right = None
 
@@ -119,6 +130,15 @@ class GazeTracking(object):
 
     def annotated_frame(self):
         """Returns the main frame with pupils highlighted"""
+
+        # Refresh the frame
+        # self.refresh(frame)
+
+        # Check if the frame is empty
+        if self.frame is None:
+            return None
+
+        # Copy the frame
         frame = self.frame.copy()
 
         if self.pupils_located:
@@ -131,3 +151,4 @@ class GazeTracking(object):
             cv2.line(frame, (x_right, y_right - 5), (x_right, y_right + 5), color)
 
         return frame
+
