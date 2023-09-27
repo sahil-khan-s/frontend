@@ -1,11 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
+import EmotionModal from "./modal";
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({ video: true });
+  const [loading, setLoading] = useState(false);
+  const [emotionModalOpen, setEmotionModalOpen] = useState(false);
+  const [emotionsData, setEmotionsData] = useState(null);
+
   // Function to request and initialize the video stream
   const initializeVideoStream = async () => {
     try {
@@ -26,6 +31,32 @@ function Page() {
     };
   }, []);
 
+  // Function to fetch emotions data
+  const [openModal, setOpenModal] = useState(false);
+
+  const fetchEmotionsData = async () => {
+    setLoading(true);
+    setOpenModal(true); // Open the modal when fetching data
+
+    // Send a GET request to your Flask backend
+    try {
+      const response = await fetch("http://localhost:5000/detect", {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      const data = await response.json();
+      setEmotionsData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   //backend logic
   const handleSend = async () => {
     if (!mediaBlobUrl) {
@@ -42,33 +73,24 @@ function Page() {
     formData.append("video", blob, "recorded_video.webm");
 
     // Send a POST request to your Flask backend
-    fetch("http://localhost:5000/download", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message); // Should print "video downloaded" if the Flask endpoint is working
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+    try {
+      const response = await fetch("http://localhost:5000/download", {
+        method: "POST",
+        body: formData,
       });
 
-      
-    fetch("http://localhost:5000/detect", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          console.error("Error:", data.error);
-        } else {
-          console.log("Detected Emotions:", data.emotions);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      const data = await response.json();
+      console.log(data.message); // Should print "video downloaded" if the Flask endpoint is working
+
+      // Fetch emotions data after sending the video
+      fetchEmotionsData();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -118,10 +140,16 @@ function Page() {
 
           <button
             onClick={handleSend}
-            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-4 rounded `}
+            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-4 rounded`}
           >
             Send
           </button>
+
+          <EmotionModal
+            open={openModal}
+            onClose={() => setOpenModal(false)}
+            emotionsData={emotionsData}
+          />
         </>
       ) : (
         <p>
