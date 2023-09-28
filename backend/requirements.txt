@@ -1,8 +1,8 @@
 
-Flask-Cors >= 4.0.0 
+flask-Cors >= 4.0.0 
 opencv-python >= 4.7.0.72
 deepface >= 0.0.79
-dlib >= 19.16.0
+# dlib >= 19.16.0
 # if dlib is not working install 
 dlib-binary >= 19.24.1
 

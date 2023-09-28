@@ -118,7 +118,7 @@ function Page() {
             ) : (
               <button
                 onClick={stopRecording}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-36 rounded-full"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-36 rounded-full"
               >
                 Stop Recording
               </button>
@@ -137,10 +137,10 @@ function Page() {
               />
             </div>
           )}
-          <div className="flex justify-center pt-5 pb-5">
+          <div className="flex justify-center pt-4 pb-5">
           <button
             onClick={handleSend}
-            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-36 rounded-full`}
+            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
           >
             Submit
           </button>
