@@ -10,6 +10,7 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [emotionModalOpen, setEmotionModalOpen] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
+  const [gazeData, SetGazeData] = useState(null);
 
   // Function to request and initialize the video stream
   const initializeVideoStream = async () => {
@@ -34,7 +35,7 @@ function Page() {
   // Function to fetch emotions data
   const [openModal, setOpenModal] = useState(false);
 
-  const fetchEmotionsData = async () => {
+  const fetchEmotionsAndGazeData = async () => {
     setLoading(true);
     setOpenModal(true);
   
@@ -48,7 +49,11 @@ function Page() {
       }
   
       const data = await response.json();
-      setEmotionsData(data.emotions); // Assuming the data structure is { emotions: [...] }
+      const gazeData = JSON.parse(data.gaze_tracking);
+      console.log(data);
+      setEmotionsData(data.emotions);
+      SetGazeData(gazeData); // Set gazeData state
+
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -87,7 +92,7 @@ function Page() {
       console.log(data.message); // Should print "video downloaded" if the Flask endpoint is working
 
       // Fetch emotions data after sending the video
-      fetchEmotionsData();
+      fetchEmotionsAndGazeData();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -150,6 +155,7 @@ function Page() {
             open={openModal}
             onClose={() => setOpenModal(false)}
             emotionsData={emotionsData}
+            gazeData={gazeData}
           />
         </>
       ) : (
