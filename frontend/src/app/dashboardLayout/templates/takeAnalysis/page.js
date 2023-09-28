@@ -36,26 +36,26 @@ function Page() {
 
   const fetchEmotionsData = async () => {
     setLoading(true);
-    setOpenModal(true); // Open the modal when fetching data
-
-    // Send a GET request to your Flask backend
+    setOpenModal(true);
+  
     try {
       const response = await fetch("http://localhost:5000/detect", {
         method: "GET",
       });
-
+  
       if (!response.ok) {
         throw new Error("Request failed");
       }
-
+  
       const data = await response.json();
-      setEmotionsData(data);
+      setEmotionsData(data.emotions); // Assuming the data structure is { emotions: [...] }
     } catch (error) {
       console.error("Error:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   //backend logic
   const handleSend = async () => {
@@ -97,9 +97,9 @@ function Page() {
     <div className="pt-4">
       {permissionGranted ? (
         <>
-          <p className="font-medium capitalize">{status}</p>
+          <h1 className="font-medium  capitalize">Status : {status}</h1>
           <video
-            className=" pb-4 w-[600px]"
+            className=" pb-4 w-[700px] rounded-xl rounded-b-xl"
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
@@ -111,14 +111,14 @@ function Page() {
             {status !== "recording" ? (
               <button
                 onClick={startRecording}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
               >
                 Start Recording
               </button>
             ) : (
               <button
                 onClick={stopRecording}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-36 rounded-full"
               >
                 Stop Recording
               </button>
@@ -129,21 +129,22 @@ function Page() {
             <div>
               <p>Recorded Video:</p>
               <video
-                className="my-4 w-[600px]"
+                className="my-4 w-[700px] rounded-xl rounded-b-xl"
                 src={mediaBlobUrl}
                 controls
-                autoPlay
-                loop
+                // autoPlay
+                // loop
               />
             </div>
           )}
-
+          <div className="flex justify-center pt-5 pb-5">
           <button
             onClick={handleSend}
-            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-4 rounded`}
+            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-36 rounded-full`}
           >
-            Send
+            Submit
           </button>
+          </div>
 
           <EmotionModal
             open={openModal}
