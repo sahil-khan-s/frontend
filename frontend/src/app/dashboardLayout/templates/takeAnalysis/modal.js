@@ -9,17 +9,18 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
       <Box
         sx={{
           position: "absolute",
-          width: 600,
+          width: 800,
           backgroundColor: "white",
           border: "2px solid #000",
           boxShadow: 24,
-          left: "40%",
-          top: "0%",
+          left: "30%",
+          top: "4%",
           p: 4,
+          borderRadius:"15px"
         }}
       >
         {emotionsData ? (
-          <div>
+          <div className="border-2 border-blue-600 rounded-xl p-3">
             <Typography style={{ fontWeight: "bold" , textAlign:"center"}} variant="h5">
               Detected Emotions
             </Typography>
@@ -50,7 +51,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
         )}
 
 {gazeData && gazeData.length > 0 ? (
-  <div className="pt-3">
+  <div className=" mt-3 border-2 border-blue-600 rounded-xl p-3 ">
     <Typography style={{ fontWeight: "bold" , textAlign:"center" }} variant="h5">
       Detected Gaze Data
     </Typography>
