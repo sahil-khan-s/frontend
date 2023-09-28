@@ -47,9 +47,10 @@ def gaze_detection(video_path):
 
         if not _:
             break
-
+        
     json_result = json.dumps(detection_counts, indent=4)
     print(json_result)
+    return json_result
 
     webcam.release()
 
