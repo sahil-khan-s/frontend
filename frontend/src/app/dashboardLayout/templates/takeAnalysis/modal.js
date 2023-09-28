@@ -14,7 +14,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
           border: "2px solid #000",
           boxShadow: 24,
           left: "30%",
-          top: "4%",
+          top: "3%",
           p: 4,
           borderRadius:"15px"
         }}

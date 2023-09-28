@@ -41,7 +41,7 @@ def gaze_detect():
             video_path = os.path.join(video_file, video) 
             if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
                 tracking = gaze_detection(video_path)
-            print("tracking:", tracking)
+                print("Detected tracking:", tracking)
     response = {'message': 'Gaze tracking detected successfully', 'gaze_tracking': tracking}
     return jsonify(response)
 
