@@ -10,6 +10,7 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [emotionModalOpen, setEmotionModalOpen] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
+  const [gazeData, setGazeData] = useState(null);
 
   // Function to request and initialize the video stream
   const initializeVideoStream = async () => {
@@ -55,6 +56,27 @@ function Page() {
       setLoading(false);
     }
   };
+  const fetchGazeData = async () => {
+    setLoading(true);
+    setOpenModal(true);
+  
+    try {
+      const response = await fetch("http://localhost:5000/detect", {
+        method: "GET",
+      });
+  
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+  
+      const data = await response.json();
+      setGazeData(data.emotions); // Assuming the data structure is { emotions: [...] }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   
 
   //backend logic
@@ -88,6 +110,8 @@ function Page() {
 
       // Fetch emotions data after sending the video
       fetchEmotionsData();
+      //fetch gaze-detection data after sending video
+      fetchGazeData();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -150,6 +174,7 @@ function Page() {
             open={openModal}
             onClose={() => setOpenModal(false)}
             emotionsData={emotionsData}
+            gazeData={gazeData}
           />
         </>
       ) : (

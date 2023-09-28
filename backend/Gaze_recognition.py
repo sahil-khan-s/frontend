@@ -47,7 +47,8 @@ def gaze_detection(video_path):
 
         if not _:
             break
-
+        
+    gaze_data = [{"name": category, "score": count} for category, count in detection_counts.items()]
     json_result = json.dumps(detection_counts, indent=4)
     print(json_result)
 
