@@ -2,7 +2,7 @@ from flask import Flask, render_template, Response, jsonify , send_file , reques
 from flask_cors import CORS 
 import os
 from emotion_recognition import detect_emotions
-from Gaze_recognition import gaze_detection
+# from Gaze_recognition import gaze_detection
 app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER=os.path.join(os.getcwd(),'database','videos')
@@ -31,7 +31,7 @@ def detect():
     response = {'message': 'Emotions detected successfully', 'emotions': emotions}
     return jsonify(response)
 
-# # for gaze tracking send output to frontend
+# for gaze tracking send output to frontend
 # @app.route('/gaze_detect', methods=['GET'])
 # def gaze_detect():
 #     database_path = 'D:\\Development\\interview-buddy\\backend\\database'
