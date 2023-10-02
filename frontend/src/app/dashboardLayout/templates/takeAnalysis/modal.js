@@ -1,20 +1,19 @@
 import React from "react";
 import { Modal, Box, Typography, LinearProgress } from "@mui/material";
-import { CircularProgressbar } from "react-circular-progressbar"; // Import circular progress bar component
-import "react-circular-progressbar/dist/styles.css"; // Import styles for the circular progress bar
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 function EmotionModal({ open, onClose, emotionsData, gazeData }) {
   return (
-    <Modal open={open} onClose={onClose}>
+    <div className="mt-[100px] ">
+    <Modal style={{display:"grid" , gridTemplateColumns:"1fr", justifyItems:"center", alignItems:"center" , justifyContent:"center"}} open={open} onClose={onClose}>
       <Box
         sx={{
-          position: "absolute",
           width: 800,
           backgroundColor: "white",
           border: "2px solid #000",
           boxShadow: 24,
-          left: "30%",
-          top: "3%",
+         margin: "auto",
           p: 4,
           borderRadius: "15px",
         }}
@@ -56,18 +55,64 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
         )}
 
         {gazeData && (
-          <div>
-            <h2>Gaze Data</h2>
-            <ul>
-              <li>Eye Blinking: {gazeData["Eye Blinking"]}</li>
-              <li>Looking right: {gazeData["Looking right"]}</li>
-              <li>Looking left: {gazeData["Looking left"]}</li>
-              <li>Looking center: {gazeData["Looking center"]}</li>
-            </ul>
+          <div className="border-2 border-blue-600 rounded-xl p-3 mt-8">
+            <Typography
+              style={{ fontWeight: "bold", textAlign: "center" }}
+              variant="h5"
+            >
+              Gaze Data
+            </Typography>
+            <div className="gaze-container ">
+              <div className="gaze-item">
+                <Typography style={{ fontWeight: "bold" }} variant="subtitle1">
+                  Eye Blinking
+                </Typography>
+                <div className="circular-progress">
+                  <CircularProgressbar
+                    value={parseFloat(gazeData["Eye Blinking"])}
+                    text={`${gazeData["Eye Blinking"]}%`}
+                  />
+                </div>
+              </div>
+              <div className="gaze-item">
+                <Typography style={{ fontWeight: "bold" }} variant="subtitle1">
+                  Looking right
+                </Typography>
+                <div className="circular-progress">
+                  <CircularProgressbar
+                    value={parseFloat(gazeData["Looking right"])}
+                    text={`${gazeData["Looking right"]}%`}
+                  />
+                </div>
+              </div>
+              <div className="gaze-item">
+                <Typography style={{ fontWeight: "bold" }} variant="subtitle1">
+                  Looking left
+                </Typography>
+                <div className="circular-progress">
+                  <CircularProgressbar
+                    value={parseFloat(gazeData["Looking left"])}
+                    text={`${gazeData["Looking left"]}%`}
+                  />
+                </div>
+              </div>
+              <div className="gaze-item">
+                <Typography style={{ fontWeight: "bold" }} variant="subtitle1">
+                  Looking center
+                </Typography>
+                <div className="circular-progress">
+                  <CircularProgressbar
+                    value={parseFloat(gazeData["Looking center"])}
+                    text={`${gazeData["Looking center"]}%`}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </Box>
     </Modal>
+    </div>
   );
 }
 
