@@ -1,8 +1,29 @@
+"use client"
 import Link from "next/link";
 import devlogo from "../../../public/assets/images/devlogo.png";
 import Image from "next/image";
 import GoogleIcon from "@mui/icons-material/Google";
-const Login = () => {
+const signUp = () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        // Registration successful, you can redirect to a login page or show a success message.
+      } else {
+        // Handle registration failure, e.g., show an error message.
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-5 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-3">
@@ -21,9 +42,23 @@ const Login = () => {
             SignUp here
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6" action="/signup" method="POST" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm space-y-6">
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="appearance-none rounded-full relative block w-full px-5 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Name"
+              />
+            </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -68,21 +103,20 @@ const Login = () => {
             </div>
           </div>
 
-
           <div>
-          <Link href="">
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center px-5 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              SignUp
-            </button>
-          </Link>
+            <Link href="">
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center px-5 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Sign Up
+              </button>
+            </Link>
           </div>
         </form>
 
         <div className="mt-6">
-        <div className=" mt-2 ">
+          <div className=" mt-2 ">
             <div className="flex items-center">
               <div className="w-full border-t border-gray-300" />
             </div>
@@ -99,13 +133,13 @@ const Login = () => {
             </button>
           </div>
           <div>
-            <p className="text-center pt-3 font-medium">Already have an account? <br/>
-          <Link href="/login">
-            <span className="text-blue-800 font-medium">Login  </span>
-            </Link>
-            here
+            <p className="text-center pt-3 font-medium">
+              Already have an account? <br />
+              <Link href="/login">
+                <span className="text-blue-800 font-medium">Login </span>
+              </Link>
+              here
             </p>
-            
           </div>
         </div>
       </div>
@@ -113,4 +147,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default signUp;

@@ -50,7 +50,7 @@ function Page() {
   
       const data = await response.json();
       const gazeData = JSON.parse(data.gaze_tracking);
-      console.log(data);
+      // console.log(data);
       setEmotionsData(data.emotions);
       SetGazeData(gazeData); // Set gazeData state
 
@@ -73,7 +73,6 @@ function Page() {
     const response = await fetch(mediaBlobUrl);
     const blob = await response.blob();
 
-    // Create a FormData object and append the Blob
     const formData = new FormData();
     formData.append("video", blob, "recorded_video.webm");
 
