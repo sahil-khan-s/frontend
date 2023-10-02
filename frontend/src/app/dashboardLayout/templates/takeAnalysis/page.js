@@ -132,14 +132,8 @@ function Page() {
 
           {mediaBlobUrl && (
             <div>
-              <p>Recorded Video:</p>
-              <video
-                className="my-4 w-[700px] rounded-xl rounded-b-xl"
-                src={mediaBlobUrl}
-                controls
-                // autoPlay
-                // loop
-              />
+              <p className="text-center pt-2">Submit Recorded Video:</p>
+             
             </div>
           )}
           <div className="flex justify-center pt-4 pb-5">
