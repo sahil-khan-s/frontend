@@ -5,16 +5,15 @@ import "react-circular-progressbar/dist/styles.css";
 
 function EmotionModal({ open, onClose, emotionsData, gazeData }) {
   return (
-    <Modal open={open} onClose={onClose}>
+    <div className="mt-[100px] ">
+    <Modal style={{display:"grid" , gridTemplateColumns:"1fr", justifyItems:"center", alignItems:"center" , justifyContent:"center"}} open={open} onClose={onClose}>
       <Box
         sx={{
-          position: "absolute",
           width: 800,
           backgroundColor: "white",
           border: "2px solid #000",
           boxShadow: 24,
-          left: "30%",
-          top: "3%",
+         margin: "auto",
           p: 4,
           borderRadius: "15px",
         }}
@@ -113,6 +112,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
         )}
       </Box>
     </Modal>
+    </div>
   );
 }
 
