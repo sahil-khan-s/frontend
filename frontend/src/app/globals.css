@@ -23,8 +23,21 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
    justify-items: center;
   }
+  .gaze-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+   justify-items: center;
+  }
   
   .emotion-item {
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .gaze-item {
+    display: grid;
+    grid-template-columns: 1fr;
+   justify-items: center;
     margin: 10px;
     text-align: center;
   }
@@ -34,4 +47,3 @@
     height: 50px;
     margin-top: 10px;
   }
-  
