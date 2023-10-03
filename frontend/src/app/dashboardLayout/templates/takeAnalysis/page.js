@@ -51,8 +51,9 @@ function Page() {
   
       const data = await response.json();
       const gazeData = JSON.parse(data.gaze_tracking);
+      const emotionsData = JSON.parse(data.emotions);
       console.log(data);
-      setEmotionsData(data.emotions);
+      setEmotionsData(emotionsData);
       SetGazeData(gazeData); // Set gazeData state
 
     } catch (error) {

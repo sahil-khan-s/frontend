@@ -25,8 +25,8 @@ function AudioComponent() {
         data.forEach((question, index) => {
           const utterance = new SpeechSynthesisUtterance(question);
           // Optional: Customize the voice and other settings if needed
-          // utterance.voice = window.speechSynthesis.getVoices()[0];
-          // utterance.rate = 1; // Adjust the speaking rate if needed
+        //   utterance.voice = window.speechSynthesis.getVoices()[6];
+        //   utterance.rate = 1; // Adjust the speaking rate if needed
           speechSynthesis.speak(utterance);
         });
       })
