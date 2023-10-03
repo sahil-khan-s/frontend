@@ -3,8 +3,11 @@ from flask_cors import CORS
 import os
 from emotion_recognition import detect_emotions
 from Gaze_recognition import gaze_detection
+from api import api_bp  # Import the Blueprint from api.py
+
 app = Flask(__name__)
 CORS(app)
+
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'database', 'videos')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -29,15 +32,17 @@ def detect():
             if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
                 emotions = detect_emotions(video_path)
                 gaze = gaze_detection(video_path)
-              
 
     response = {
         'message': 'Emotions and Gaze tracking detected successfully',
         'emotions': emotions,
-        'gaze_tracking':gaze,
+        'gaze_tracking': gaze,
     }
 
     return jsonify(response)
+
+# Register the api_bp Blueprint
+app.register_blueprint(api_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run(debug=True)
