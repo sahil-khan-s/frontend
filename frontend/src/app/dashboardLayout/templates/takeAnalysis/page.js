@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import EmotionModal from "./modal";
+import QuestionPlayer from "./audio"
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
@@ -100,6 +101,7 @@ function Page() {
 
   return (
     <div className="pt-4">
+      <QuestionPlayer/>
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>
