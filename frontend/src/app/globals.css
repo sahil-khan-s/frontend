@@ -18,7 +18,7 @@
 
   }
 
-  .emotion-container {
+  /* .emotion-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
    justify-items: center;
@@ -40,7 +40,7 @@
    justify-items: center;
     margin: 10px;
     text-align: center;
-  }
+  } */
   
   .circular-progress {
     width: 50px;
