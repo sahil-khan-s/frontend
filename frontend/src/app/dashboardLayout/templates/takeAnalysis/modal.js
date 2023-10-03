@@ -28,57 +28,23 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
             borderRadius: "5px",
           }}
         >
-          {/* {emotionsData ? (
-            <div className="border-2 border-blue-600 rounded-xl p-3">
-              <Typography
-                style={{ fontWeight: "bold", textAlign: "center" }}
-                variant="h5"
-              >
-                Detected Emotions
-              </Typography>
-              <div className="emotion-container">
-                {emotionsData.map((emotion) => (
-                  <div key={emotion.name} className="emotion-item capitalize">
-                    <Typography
-                      style={{ fontWeight: "bold" }}
-                      variant="subtitle1"
-                    >
-                      {emotion.name}
-                    </Typography>
-                    <div className="circular-progress">
-                      <CircularProgressbar
-                        value={parseFloat(emotion.score)}
-                        text={`${emotion.score}%`}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div>
-              <Typography variant="h5">Loading ...</Typography>
-              <LinearProgress />
-            </div>
-          )} */}
-
-          {gazeData ? (
-            <div className=" p-3 mt-8">
+          {emotionsData ? (
+            <div className="p-3 mt-8">
               <Typography
                 style={{ fontWeight: "bold", textAlign: "center" }}
                 variant="h5"
               >
                 Emotions
               </Typography>
-              <div className="gaze-container ">
+              <div className="gaze-container">
                 <div className="gaze-item">
                   <div
-                    style={{ width: 200, height: 200 ,  margin: "auto"}}
-                    className="circular-progress "
+                    style={{ width: 200, height: 200, margin: "auto" }}
+                    className="circular-progress"
                   >
                     <CircularProgressbar
-                      value={parseFloat(gazeData["Eye Blinking"])}
-                      text={`${gazeData["Eye Blinking"]}%`}
+                      value={parseFloat(emotionsData["emotion_score"])}
+                      text={`${parseFloat(emotionsData["emotion_score"])}%`}
                     />
                   </div>
                 </div>
@@ -90,19 +56,19 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
               <LinearProgress />
             </div>
           )}
-          
+
           {gazeData && (
             <div className=" p-3 mt-8">
               <Typography
                 style={{ fontWeight: "bold", textAlign: "center" }}
                 variant="h5"
               >
-                Gaze 
+                Gaze
               </Typography>
               <div className="gaze-container ">
                 <div className="gaze-item">
                   <div
-                    style={{ width: 200, height: 200 , margin: "auto" ,}}
+                    style={{ width: 200, height: 200, margin: "auto" }}
                     className="circular-progress "
                   >
                     <CircularProgressbar
@@ -113,7 +79,6 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
                 </div>
               </div>
             </div>
-        
           )}
         </Box>
       </Modal>
