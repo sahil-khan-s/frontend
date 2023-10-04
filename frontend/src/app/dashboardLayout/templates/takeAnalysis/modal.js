@@ -72,8 +72,8 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
                     className="circular-progress "
                   >
                     <CircularProgressbar
-                      value={parseFloat(gazeData["Eye Blinking"])}
-                      text={`${gazeData["Eye Blinking"]}%`}
+                      value={parseFloat(gazeData["Score"])}
+                      text={`${gazeData["Score"]}%`}
                     />
                   </div>
                 </div>
