@@ -54,7 +54,7 @@ def login():
             response = {'message': 'Login successful'}
             return jsonify(response), 200
         else:
-            response = {'message': 'Login failed. Invalid credentials.'}
+            response = {'message': ' Invalid credentials.'}
             return jsonify(response), 401
 
     except Exception as e:

@@ -15,35 +15,22 @@
   #ededf7
 );
 
+  }
+  
+.gradient {
+    /* Add your styles here, including background color */
+    background: linear-gradient(
+  45deg,
+  #f5f0f0,
+  #a8a8fd,
+  #ede5ec,
+  #c5def2,
+  #efeff1,
+  #eeeff1,
+  #ededf7
+);
+
 
   }
 
-  /* .emotion-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-   justify-items: center;
-  }
-  .gaze-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-   justify-items: center;
-  }
   
-  .emotion-item {
-    margin: 10px;
-    text-align: center;
-  }
-  
-  .gaze-item {
-    display: grid;
-    grid-template-columns: 1fr;
-   justify-items: center;
-    margin: 10px;
-    text-align: center;
-  } */
-  
-  .circular-progress {
-    width: 50px;
-    height: 50px;
-    margin-top: 10px;
-  }

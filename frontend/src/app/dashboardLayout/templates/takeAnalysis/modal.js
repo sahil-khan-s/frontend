@@ -6,7 +6,7 @@ import "react-circular-progressbar/dist/styles.css";
 function EmotionModal({ open, onClose, emotionsData, gazeData }) {
   return (
     <div className="mt-[100px] ">
-      <Modal
+      <Modal className="gradient"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr",
@@ -18,6 +18,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
         onClose={onClose}
       >
         <Box
+          className="gradient"
           sx={{
             width: "400px",
             backgroundColor: "white",
