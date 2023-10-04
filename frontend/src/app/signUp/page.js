@@ -4,7 +4,9 @@ import devlogo from "../../../public/assets/images/devlogo.png";
 import Image from "next/image";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useRouter } from 'next/navigation'
+import { useState } from "react";
 const signUp = () => {
+const [message , setMessage]= useState("")
   const router = useRouter()
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,11 +22,12 @@ const signUp = () => {
       });
     
       if (response.ok) {
-        console.log("Registration successful");
-        router.push("/login");
-      } else {
-        console.error("Registration failed");
-      }
+       setMessage("Registration successful");
+      router.push("/login");
+    } else {
+      const data = await response.json();
+      setMessage(data.message); // Display the message from the backend
+    }
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -122,7 +125,7 @@ const signUp = () => {
           
           </div>
         </form>
-
+        {message && <p className="text-red-600 text-center">{message}</p>}
         <div className="mt-6">
           <div className=" mt-2 ">
             <div className="flex items-center">

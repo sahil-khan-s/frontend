@@ -5,14 +5,13 @@ import Image from "next/image";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useState } from "react";
 import { useRouter } from "next/navigation"
-
 const Login = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+ const [message , setMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -25,10 +24,12 @@ const Login = () => {
       });
 
       if (response.ok) {
+        setMessage("Login successful")
         router.push("/dashboardLayout/templates"); 
       } else {
-      
-        console.error("Login failed");
+      const data = await response.json();
+      setMessage(data.message)
+        // console.error("Login failed");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -120,7 +121,7 @@ const Login = () => {
         
           </div>
         </form>
-
+        {message && <p className="text-red-600 text-center">{message}</p>}
         <div className="mt-6">
           <div className=" mt-2 ">
             <div className="flex items-center">
