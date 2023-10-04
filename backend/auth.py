@@ -3,7 +3,6 @@ from flask import Blueprint, request, jsonify
 
 auth_bp = Blueprint('auth', __name__)
 
-# Store registered users in memory as a list of dictionaries
 registered_users = []
 
 @auth_bp.route('/signup', methods=['POST'])
@@ -14,7 +13,7 @@ def signup():
     password = data.get('password')
 
     try:
-        # Check if the user with the same email already exists
+        
         existing_user = next((user for user in registered_users if user['email'] == email), None)
 
         if existing_user:
@@ -30,6 +29,8 @@ def signup():
 
         # Store the user data in memory
         registered_users.append(user_data)
+
+        print(f"User registered: {user_data}")
 
         response = {'message': 'User registered successfully'}
         return jsonify(response), 201

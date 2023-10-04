@@ -1,8 +1,44 @@
+"use client"
 import Link from "next/link";
 import devlogo from "../../../public/assets/images/devlogo.png";
 import Image from "next/image";
 import GoogleIcon from "@mui/icons-material/Google";
+import { useState } from "react";
+import { useRouter } from "next/navigation"
+
 const Login = () => {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        body: new URLSearchParams(formData), // Send form data as x-www-form-urlencoded
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+
+      if (response.ok) {
+        router.push("/dashboardLayout/templates"); 
+      } else {
+      
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-5 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-3">
@@ -21,7 +57,11 @@ const Login = () => {
             Sign in here
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6"   
+         action="/login"
+          method="POST"
+          onSubmit={handleSubmit}
+          >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm space-y-6">
             <div>
@@ -34,6 +74,8 @@ const Login = () => {
                 type="email"
                 autoComplete="email"
                 required
+                value={formData.email}
+                onChange={handleInputChange}
                 className="appearance-none rounded-full relative block w-full px-5 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
@@ -48,6 +90,8 @@ const Login = () => {
                 type="password"
                 autoComplete="current-password"
                 required
+                value={formData.password}
+                onChange={handleInputChange}
                 className="appearance-none rounded-full relative block w-full px-5 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
@@ -66,14 +110,14 @@ const Login = () => {
           </div>
 
           <div>
-          <Link href="/dashboardLayout/dashboard">
+
             <button
               type="submit"
               className="group relative w-full flex justify-center px-5 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login
             </button>
-          </Link>
+        
           </div>
         </form>
 

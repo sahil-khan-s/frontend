@@ -3,26 +3,34 @@ import Link from "next/link";
 import devlogo from "../../../public/assets/images/devlogo.png";
 import Image from "next/image";
 import GoogleIcon from "@mui/icons-material/Google";
+import { useRouter } from 'next/navigation'
 const signUp = () => {
+  const router = useRouter()
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
 
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://localhost:5000/auth/signup", {
         method: "POST",
         body: formData,
       });
-
+    
       if (response.ok) {
-        // Registration successful, you can redirect to a login page or show a success message.
+        console.log("Registration successful");
+        router.push("/login");
       } else {
-        // Handle registration failure, e.g., show an error message.
+        console.error("Registration failed");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Fetch error:", error);
     }
+    
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-5 px-4 sm:px-6 lg:px-8">
@@ -36,13 +44,13 @@ const signUp = () => {
             height={100}
           />
           <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
-            Welcome Back to Interview Buddy
+            Welcome to Interview Buddy
           </h2>
           <p className="mt-2 text-center text-2xl font-medium text-gray-900">
             SignUp here
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="/signup" method="POST" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" action="" method="POST" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm space-y-6">
             <div>
@@ -104,14 +112,14 @@ const signUp = () => {
           </div>
 
           <div>
-            <Link href="">
+       
               <button
                 type="submit"
                 className="group relative w-full flex justify-center px-5 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Sign Up
               </button>
-            </Link>
+          
           </div>
         </form>
 

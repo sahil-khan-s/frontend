@@ -3,15 +3,14 @@ from flask_cors import CORS
 import os
 from emotion_recognition import detect_emotions
 from Gaze_recognition import gaze_detection
-from api import api_bp  # Import the Blueprint from api.py
-
+from api import api_bp  
+from auth import auth_bp
 app = Flask(__name__)
 CORS(app)
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'database', 'videos')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# Register the auth_bp Blueprint for user registration
-# app.register_blueprint(auth_bp, url_prefix='/auth')
+
 @app.route('/download', methods=['POST'])
 def download():
     file = request.files['video']
@@ -44,6 +43,8 @@ def detect():
 
 # Register the api_bp Blueprint
 app.register_blueprint(api_bp, url_prefix='/api')
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
