@@ -29,4 +29,6 @@ instance/
 .pytest_cache/
 
 # videos
+backend/database/videos/
 videos/
+.videos/
