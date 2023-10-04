@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import EmotionModal from "./modal";
-import QuestionPlayer from "./audio"
+import AudioComponent from "./audio"
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
@@ -75,7 +75,6 @@ function Page() {
     const response = await fetch(mediaBlobUrl);
     const blob = await response.blob();
 
-    // Create a FormData object and append the Blob
     const formData = new FormData();
     formData.append("video", blob, "recorded_video.webm");
 
@@ -102,7 +101,7 @@ function Page() {
 
   return (
     <div className="pt-4">
-      <QuestionPlayer/>
+      <AudioComponent/>
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>
