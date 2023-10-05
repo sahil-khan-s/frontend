@@ -6,7 +6,7 @@ function Footer() {
   return (
     <div className=''>
     <div className=' px-4 '>
-        <nav className=" py-4 flex space-x-14 items-center ">
+        <nav className=" py-4  flex items-center space-x-14 items-center ">
       <div className="flex items-center">
         <Image src={devsort} alt="Logo" width={130} height={100} className="" />
       </div>
@@ -15,7 +15,7 @@ function Footer() {
         © 2032 Prepare Interview
         </span>
       </div>
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-6 text-bold text-xl text-blue-800">
         <Link href="/">
           <h1 className=" font-medium">Pricing</h1>
         </Link>

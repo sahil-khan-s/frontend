@@ -1,28 +1,29 @@
 import React from "react";
 import Image from "next/image";
 import Interview from "../../../../public/assets/images/interview.jpg";
-import MasterArt from "@/app/components/common/MasterArt"
+import MasterArt from "@/app/components/common/MasterArt";
 function Hero() {
   return (
-    <div className="bg-gray-700 lg:h-[500px]">
-      <div className="  mx-auto container 2xl:max-w-container xl:px-[128px]">
-        <div className="flex lg:flex-row flex-col  pt-24 items-center justify-between">
-          <MasterArt 
-          className="max-w-[500px]"
-          className2="text-white text-3xl font-bold"
-          className3="text-white pt-5"
-          title = "Master The Art Of Interviewing"
-          discription = "Your Personal Interview Coach: Transforming Interviews, Empowering Careers"
-          btnText ="Try Devsort Free"
+    <div className="gradient   pb-12">
+      <div className="  mx-auto container 2xl:max-w-container  xl:px-[128px]">
+        <div className="flex lg:flex-row flex-col  max-w-[1000px] mx-auto pt-12 items-center justify-center justify-between">
+          
+          <div>
+          <MasterArt
+            className=""
+            className2="text-blue-800  rounded-tl-[40px] rounded-br-[40px] py-5 text-[40px] font-bold"
+            className3="text-blue-800  pt-5"
+            title="Elevate Your Interviews with Interview Buddy"
+            discription=" Unlock the power of Interview Buddy, your trusted companion for
+            interview preparation. Whether you're a job seeker aiming to
+            land your dream role or a professional looking to sharpen your
+            skills, our AI-driven platform is here to help you succeed."
+            btnText="Try Our Service"
           />
+          
+          </div>
           <div className="py-5 lg:py-0">
-            <Image
-              src={Interview}
-              alt="Logo"
-              width={500}
-              height={500}
-              className=""
-            />
+           
           </div>
         </div>
       </div>

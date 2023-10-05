@@ -50,15 +50,18 @@ def gaze_detection(video_path):
             weighted_count = count * weight
             score += weighted_count
 
+        # check the score if exceed make it 100
+        score = min(100, score)
 
         # if video end it will quit
         if not _:
             break
+        
+    webcam.release()
 
     # Print the detection counts and score as JSON
     score_dict = {"Score": score}
     json_result = json.dumps(score_dict, indent=4)
     return json_result
 
-    webcam.release()
 

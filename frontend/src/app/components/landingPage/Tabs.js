@@ -16,9 +16,7 @@ function UnlockTabs({ span, title, subTitle }) {
 
   return (
     <div className="">
-      <div className="py-8 bg-gray-200">
-        <h1 className="text-center text-xl">{span}</h1>
-      </div>
+      
       <div className="py-9">
         <h1 className="pb-5 text-center text-2xl font-bold">{title}</h1>
         <p className="text-center text-xl font-medium">{subTitle}</p>
@@ -35,11 +33,11 @@ function UnlockTabs({ span, title, subTitle }) {
           </Box>
           <TabPanel value="1">
            <div className="flex justify-between pb-8">
-            <div className="max-w-[400px] pt-10">
-            <h1 className=" py-2 font-bold">Unleash Nonverbal Excellence with Video Analysis</h1>
-            <p>Pluoo AI introduces Video Analysis—a game-changer in interview preparation. Our cutting-edge technology evaluates your body language, facial expressions, and overall presentation, providing personalized feedback to refine your nonverbal communication. Master nonverbal cues, exude confidence, and leave a lasting impression. Elevate your interview skills with Pluoo AI today.</p>
+            <div className="max-w-[500px] pt-10">
+            <h1 className=" py-2 text-2xl font-bold">Unleash Nonverbal Excellence with Video Analysis</h1>
+            <p className="text-[19px]">Pluoo AI introduces Video Analysis—a game-changer in interview preparation. Our cutting-edge technology evaluates your body language, facial expressions, and overall presentation, providing personalized feedback to refine your nonverbal communication. Master nonverbal cues, exude confidence, and leave a lasting impression. Elevate your interview skills with Pluoo AI today.</p>
             </div>
-            <div><Image src={videoTab} alt="" width={600} height={500}/></div>
+            <div><Image src={videoTab} alt="" width={700} height={500}/></div>
             
            </div>
 

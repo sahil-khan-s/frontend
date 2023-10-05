@@ -11,19 +11,37 @@ btnstyle,
 }) {
   return (
     <div>
-         <div className={` ${className}`}>
-            <h1 className={` ${className2}`}>{title}</h1>
-            <p className={` ${className3}`}>
+         <div className={` ${className}  mt-10`}>
+            <h1 className={` ${className2} text-blue-800 text-center `}>{title}</h1>
+            <p className={` ${className3} text-center py-4  text-[23px]`}>
               {discription}
             </p>
-            <div className={`${btnstyle} border-2 rounded-full bg-white py-2 mt-4 max-w-[400px]`}>
-                <form>
-              <input style={{border: "none"}} className="border-none  ml-4" type="text" placeholder="Enter your email address" />
+            <div className="text-center text-blue-800">
+             
+             <p className="gradient-text rounded-tl-3xl rounded-br-3xl max-w-[600px] py-5 mx-auto mb-8 font-bold text-[25px] text-white">
+               Experience real-life interview 
+             </p>
+             <p className=" mb-6 text-[21px]">
+               Experience real-life interview simulations tailored to your
+               field, receive personalized feedback, and gain confidence with
+               every practice round. With Interview Buddy, you can practice for
+               a wide range of job roles, from software development and
+               marketing to finance and beyond.
+             </p>
+           
+             <p className=" mb-8 text-[21px]">
+               Join thousands of successful candidates who trust Interview
+               Buddy as their go-to interview preparation tool. Sign up today
+               and start your journey towards interview success.
+             </p>
+             {/* Add your call-to-action button here if needed */}
+           </div>
+            <div className={`${btnstyle}   mt-5 flex justify-center` }>
               <Link href="/login">
-             <button className=" bg-yellow-400 py-2 px-3 rounded-full">{btnText}</button>
+             <button className=" bg-blue-800 gradient-text py-4 font-bold px-14 text-white rounded-full">{btnText}</button>
              </Link>
-             </form>
             </div>
+            
           </div>
     </div>
   )
