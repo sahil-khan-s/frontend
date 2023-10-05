@@ -7,20 +7,20 @@ function Header() {
     <div className=''>
 
    
-    <div className='  mx-auto container 2xl:max-w-container xl:px-[128px]'>
-        <nav className=" py-4 flex justify-between items-center ">
+    <div className=' bg-white fixed opacity-[0.9]  mx-auto container 2xl:max-w-container xl:px-[128px]'>
+        <nav className=" py-4 flex justify-between  items-center ">
       <div className="flex items-center">
-        <Image src={devsort} alt="Logo" width={130} height={100} className="" />
+        <Image src={devsort} alt="Logo" width={170} height={100} className="" />
       </div>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center text-blue-800 text-xl space-x-8">
         <Link href="/">
-          <h1 className=" font-medium">Prices</h1>
+          <h1 className=" font-bold">Prices</h1>
         </Link>
         <Link href="/">
-          <h1 className=" font-medium">Resources</h1>
+          <h1 className=" font-bold">Resources</h1>
         </Link>
         <Link href="/login">
-          <h1 className=" font-medium">Login</h1>
+          <h1 className=" font-bold">Login</h1>
         </Link>
       </div>
     </nav>
