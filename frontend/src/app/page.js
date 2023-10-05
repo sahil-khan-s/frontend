@@ -9,8 +9,9 @@ export default function Home() {
     <>
     <Header/>
       <Hero />
+    <div className="background">
       <UnlockTabs
-        span="Hi I want to become a Software Engineer_ can you help me prepare?"
+        span=""
         title="Supercharge Your Interview Skills"
         subTitle="Unlock Opportunities"
       />
@@ -28,6 +29,7 @@ export default function Home() {
             />
           </div>
         </div>
+      </div>
       </div>
       <Footer/>
     </>

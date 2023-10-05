@@ -32,5 +32,16 @@
 
 
   }
+.backgrounds {
+  opacity: 0.2;
+  position: sticky;
+    /* Add your styles here, including background color */
+   background-image: url(../../public/assets//images/job-interview.png);
+   background-position: center;
+   background-size: cover;
+
+
+  }
+
 
   
