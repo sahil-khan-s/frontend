@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Box, Typography, LinearProgress } from "@mui/material";
+import { Modal, Box, Typography, CircularProgress } from "@mui/material";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -20,7 +20,8 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
         <Box
           className="gradient"
           sx={{
-            width: "400px",
+            width: "600px",
+            minHeight:"200px",
             backgroundColor: "white",
             border: "2px solid #000",
             boxShadow: 24,
@@ -52,9 +53,9 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
               </div>
             </div>
           ) : (
-            <div>
-              <Typography variant="h5">Loading ...</Typography>
-              <LinearProgress />
+            <div className="flex flex-col justify-center items-center">
+              <Typography variant="h5">Loading</Typography>
+              <CircularProgress />
             </div>
           )}
 
