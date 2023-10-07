@@ -103,6 +103,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
                 Go Back
               </button>
               </div>
+              
 
         </Box>
       </Modal>
