@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import EmotionModal from "./modal";
-import AudioComponent from "./audio"
+import AudioComponent from "./audio";
+import { CircularProgress , Typography} from "@mui/material";
+
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({ video: true });
   const [loading, setLoading] = useState(false);
-  const [emotionModalOpen, setEmotionModalOpen] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
 
@@ -38,31 +39,29 @@ function Page() {
 
   const fetchEmotionsAndGazeData = async () => {
     setLoading(true);
-    setOpenModal(true);
-  
+
     try {
       const response = await fetch("http://localhost:5000/detect", {
         method: "GET",
       });
-  
+
       if (!response.ok) {
         throw new Error("Request failed");
       }
-  
+
       const data = await response.json();
       const gazeData = JSON.parse(data.gaze_tracking);
       const emotionsData = JSON.parse(data.emotions);
       console.log(data);
       setEmotionsData(emotionsData);
       SetGazeData(gazeData); // Set gazeData state
-
     } catch (error) {
       console.error("Error:", error);
     } finally {
       setLoading(false);
+      setOpenModal(true);
     }
   };
-  
 
   //backend logic
   const handleSend = async () => {
@@ -80,6 +79,7 @@ function Page() {
 
     // Send a POST request to your Flask backend
     try {
+      setLoading(true);
       const response = await fetch("http://localhost:5000/download", {
         method: "POST",
         body: formData,
@@ -96,12 +96,13 @@ function Page() {
       fetchEmotionsAndGazeData();
     } catch (error) {
       console.error("Error:", error);
+      return;
     }
   };
 
   return (
-    <div className="pt-4">
-      <AudioComponent/>
+    <div className="pt-4 ">
+      <AudioComponent />
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>
@@ -135,24 +136,33 @@ function Page() {
           {mediaBlobUrl && (
             <div>
               <p className="text-center pt-2">Submit Recorded Video:</p>
-             
             </div>
           )}
-          <div className="flex justify-center pt-4 pb-5">
-          <button
-            onClick={handleSend}
-            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
-          >
-            Submit
-          </button>
+          <div className="flex justify-center pt-4 pb-5 ">
+            {loading ? ( // Display loader while loading is true
+             <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
+               <Typography variant="h5" style={{ color :"white"}}>Loading</Typography>
+                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
+             </div>
+            ) : (
+              <button
+                onClick={handleSend}
+                disabled={loading}
+                className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
+              >
+                Submit
+              </button>
+            )}
           </div>
 
-          <EmotionModal
-            open={openModal}
-            onClose={() => setOpenModal(false)}
-            emotionsData={emotionsData}
-            gazeData={gazeData}
-          />
+          {openModal && (
+            <EmotionModal
+              open={openModal}
+              onClose={() => setOpenModal(false)}
+              emotionsData={emotionsData}
+              gazeData={gazeData}
+            />
+          )}
         </>
       ) : (
         <p>
