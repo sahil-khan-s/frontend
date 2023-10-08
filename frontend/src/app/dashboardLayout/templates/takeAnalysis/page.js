@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
+import { useReactMediaRecorder ,unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
 import AudioComponent from "./audio";
 import { CircularProgress , Typography} from "@mui/material";
@@ -15,24 +15,33 @@ function Page() {
   const [gazeData, SetGazeData] = useState(null);
 
   // Function to request and initialize the video stream
-  const initializeVideoStream = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setVideoStream(stream);
-      setPermissionGranted(true);
-    } catch (error) {
-      console.error("Error accessing camera:", error);
-    }
-  };
+   useEffect(() => {
+    let isMounted = true; // Flag to track if the component is mounted
 
-  useEffect(() => {
-    initializeVideoStream();
+    const setup = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        
+        // Check if the component is still mounted before updating state
+        if (isMounted) {
+          setVideoStream(stream);
+          setPermissionGranted(true);
+        }
+      } catch (error) {
+        console.error("Error accessing camera:", error);
+      }
+    };
+
+    setup();
+
     return () => {
+      isMounted = false; // Component is unmounting, update the flag
       if (videoStream) {
         videoStream.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
+  
 
   // Function to fetch emotions data
   const [openModal, setOpenModal] = useState(false);
@@ -102,7 +111,7 @@ function Page() {
 
   return (
     <div className="pt-4 ">
-      <AudioComponent />
+      {/* <AudioComponent /> */}
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>
