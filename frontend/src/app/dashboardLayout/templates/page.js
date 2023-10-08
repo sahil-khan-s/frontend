@@ -152,13 +152,13 @@ const page = () => {
   )
 }
 
-export async function getStaticProps() {
-  return {
-    props: {
-      data: interviewData, // Pass the imported JSON data as a prop
-    },
-  };
-}
+// export async function getStaticProps() {
+//   return {
+//     props: {
+//       data: interviewData, // Pass the imported JSON data as a prop
+//     },
+//   };
+// }
 
 
 export default page
