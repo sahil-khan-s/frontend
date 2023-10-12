@@ -1,11 +1,6 @@
 "use client";
 import React from "react";
-import Link from "next/link";
-import { useState } from "react";
 import PracticeNow from "../common/PracticeNow";
-import search from "../../../../public/assets/images/search.svg";
-import Image from "next/image";
-import { MediaRecorderProvider } from "react-media-recorder";
 import InterviewCards from "./interview";
 const page = () => {
   return (
@@ -30,12 +25,5 @@ const page = () => {
   );
 };
 
-// export async function getStaticProps() {
-//   return {
-//     props: {
-//       data: interviewData, // Pass the imported JSON data as a prop
-//     },
-//   };
-// }
 
 export default page;

@@ -108,7 +108,7 @@ const InterviewCards = () => {
           <div key={index} className="card">
             <h2 className="font-bold text-2xl">{item.title}</h2>
             <p className="py-5 text-blue-800">{item.description}</p>
-            <Link href="/dashboardLayout/templates/takeAnalysis">
+            {/* <Link href="/dashboardLayout/templates/takeAnalysis"> */}
             <div>
               <button
                 onClick={() => handleSendTitle(item.title)}
@@ -118,7 +118,7 @@ const InterviewCards = () => {
               </button>
             </div>
 
-            </Link>
+            {/* </Link> */}
           </div>
         ))}
       </div>
