@@ -14,13 +14,22 @@ def init_db():
         )
     ''')
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS user_data (
+        CREATE TABLE IF NOT EXISTS video_recordings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
-            recorded_video_path TEXT,
-            emotions TEXT,
-            gaze_tracking TEXT
+            video_path TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     ''')
     conn.commit()
     conn.close()
+
+    # cursor.execute('''
+    #     CREATE TABLE IF NOT EXISTS user_data (
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #         user_id INTEGER,
+    #         recorded_video_path TEXT,
+    #         emotions TEXT,
+    #         gaze_tracking TEXT
+    #     )
+    # ''')
