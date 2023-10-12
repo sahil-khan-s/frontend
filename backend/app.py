@@ -1,15 +1,49 @@
-from flask import Flask, render_template, Response, jsonify, request, send_from_directory
+from flask import Flask,g, render_template, Response, jsonify, request, send_from_directory
 from flask_cors import CORS
 import os
 from emotion_recognition import detect_emotions
 from Gaze_recognition import gaze_detection
 from api import api_bp  
 from auth import auth_bp
+import sqlite3
 app = Flask(__name__)
 CORS(app)
+app.config['SESSION_TYPE'] = 'filesystem'  # Use filesystem session storage
+app.config['DATABASE'] = 'user_data.db'  # Specify the database file
+app.secret_key = 'your_secret_key'
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'database', 'videos')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Initialize the SQLite database connection
+@app.before_request
+def before_request():
+    g.db_connection = sqlite3.connect(app.config['DATABASE'])
+
+@app.teardown_request
+def teardown_request(exception):
+    if hasattr(g, 'db_connection'):
+        g.db_connection.close()
+
+@app.route('/get_users', methods=['GET'])
+def get_users():
+    conn = sqlite3.connect(app.config['DATABASE'])
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users")
+    users = cursor.fetchall()
+    conn.close()
+
+    user_list = []
+    for user in users:
+        user_dict = {
+            'id': user[0],
+            'name': user[1],
+            'email': user[2]
+        }
+        user_list.append(user_dict)
+
+    return jsonify(user_list)
+
 
 @app.route('/download', methods=['POST'])
 def download():
@@ -44,6 +78,7 @@ def detect():
 # Register the api_bp Blueprint
 app.register_blueprint(api_bp, url_prefix='/api')
 app.register_blueprint(auth_bp, url_prefix='/auth')
+
 
 
 if __name__ == '__main__':

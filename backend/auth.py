@@ -1,9 +1,8 @@
-# auth.py
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
+from db import init_db
 
 auth_bp = Blueprint('auth', __name__)
-
-registered_users = []
+init_db()  # Initialize the database
 
 @auth_bp.route('/signup', methods=['POST'])
 def signup():
@@ -13,24 +12,20 @@ def signup():
     password = data.get('password')
 
     try:
-        
-        existing_user = next((user for user in registered_users if user['email'] == email), None)
+        conn = g.get('db_connection')  # Get the database connection from the application context
+        cursor = conn.cursor()
+
+        # Check if the user already exists
+        cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+        existing_user = cursor.fetchone()
 
         if existing_user:
             response = {'message': 'User with this email already exists'}
             return jsonify(response), 400
 
-        # Create a user dictionary
-        user_data = {
-            'name': name,
-            'email': email,
-            'password': password,
-        }
-
-        # Store the user data in memory
-        registered_users.append(user_data)
-
-        print(f"User registered: {user_data}")
+        # Insert the user into the database
+        cursor.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", (name, email, password))
+        conn.commit()
 
         response = {'message': 'User registered successfully'}
         return jsonify(response), 201
@@ -47,14 +42,18 @@ def login():
     password = data.get('password')
 
     try:
-        # Find a user with the provided email and password
-        matching_user = next((user for user in registered_users if user['email'] == email and user['password'] == password), None)
+        conn = g.get('db_connection')  # Get the database connection from the application context
+        cursor = conn.cursor()
+
+        # Retrieve the user from the database
+        cursor.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
+        matching_user = cursor.fetchone()
 
         if matching_user:
             response = {'message': 'Login successful'}
             return jsonify(response), 200
         else:
-            response = {'message': ' Invalid credentials.'}
+            response = {'message': 'Invalid credentials.'}
             return jsonify(response), 401
 
     except Exception as e:

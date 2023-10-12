@@ -53,7 +53,7 @@ const [message , setMessage]= useState("")
             SignUp here
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="" method="POST" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" action="/auth/signup" method="POST" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm space-y-6">
             <div>
@@ -99,12 +99,12 @@ const [message , setMessage]= useState("")
               />
             </div>
             <div>
-              <label htmlFor=" password" className="sr-only">
+              <label htmlFor=" Confirm_password" className="sr-only">
                 Confirm Password
               </label>
               <input
-                id="password"
-                name="password"
+                id="Confirm_password"
+                name="Confirm_password"
                 type="password"
                 autoComplete="current-password"
                 required
@@ -118,6 +118,7 @@ const [message , setMessage]= useState("")
        
               <button
                 type="submit"
+                value="Register"
                 className="group relative w-full flex justify-center px-5 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Sign Up
