@@ -85,7 +85,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
                       text={`${gazeData["Score"]}%`}
                       styles={buildStyles({
                         textColor: "white",
-                        pathColor: "blue",
+                        pathColor: "red",
                         trailColor: "gold",
                       })}
                     />
@@ -103,6 +103,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData }) {
                 Go Back
               </button>
               </div>
+              
 
         </Box>
       </Modal>

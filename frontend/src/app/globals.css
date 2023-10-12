@@ -44,9 +44,12 @@
 }
 
 
-.background{
-  background-image: url(../../public//assets/images/job-interview.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
+/* .background{
+  background: linear-gradient(
+    45deg,
+    #a2a2ef,
+    #797ba5,
+    #808177
+  );
+ 
+} */
