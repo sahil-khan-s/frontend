@@ -25,7 +25,6 @@ def teardown_request(exception):
     if hasattr(g, 'db_connection'):
         g.db_connection.close()
 
-
 @app.route('/sendTitle', methods=['POST'])
 def handle_card_title():
     try:
@@ -41,7 +40,6 @@ def handle_card_title():
         print("Error:", str(e))
         return jsonify({"error": "An error occurred"})
 
-
 @app.route('/get_users', methods=['GET'])
 def get_users():
     conn = sqlite3.connect(app.config['DATABASE'])
@@ -55,7 +53,8 @@ def get_users():
         user_dict = {
             'id': user[0],
             'name': user[1],
-            'email': user[2]
+            'email': user[2],
+            'password': user[3]
         }
         user_list.append(user_dict)
 
