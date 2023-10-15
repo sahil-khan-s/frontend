@@ -1,0 +1,7 @@
+[
+    "1. Can you explain the concept of database indexing and how it can improve query performance?",
+    "2. How would you handle a situation where a database query is taking an excessively long time to execute?",
+    "3. Describe a time when you had to optimize a slow-performing database query. What steps did you take and what was the outcome?",
+    "4. Can you explain the difference between synchronous and asynchronous programming, and when you would choose one over the other for backend development?",
+    "5. How would you approach designing and implementing a scalable architecture for a high-traffic web application? What technologies and strategies would you consider?"
+]

@@ -1,8 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder ,unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
-import AudioComponent from "./audio";
+// import AudioComponent from "./audio";
+import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
 
 function Page() {
@@ -13,6 +15,10 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
+  const { contextQuestions } = useAppContext();
+  useEffect(() => {
+    console.log('Questions in contextQuestions:', contextQuestions);
+  }, [contextQuestions]);
 
   // Function to request and initialize the video stream
    useEffect(() => {
@@ -108,10 +114,30 @@ function Page() {
       return;
     }
   };
+ 
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const questionArray = contextQuestions.questions; // Ensure it's an array
+  if (!questionArray || questionArray.length === 0) {
+    return <p>No questions available.</p>;
+  }
+  // Function to handle the "Next" button click
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questionArray.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      // Handle the case when all questions have been displayed
+    }
+  };
 
   return (
     <div className="pt-4 ">
       {/* <AudioComponent /> */}
+      <div className="pt-4">
+      <h2>Question {currentQuestionIndex + 1}</h2>
+      <p>{questionArray[currentQuestionIndex]}</p>
+      <button onClick={handleNextQuestion}>Next</button>
+    </div>
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>

@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from 'next/navigation'
+import { useState ,useEffect } from "react";
 import search from "../../../../public/assets/images/search.svg";
 import Image from "next/image";
-import Axios from "axios";
+import { useAppContext } from '../../context/AppContext';
 const jsonData = [
   {
     title: "Backend Developer",
@@ -44,6 +45,7 @@ const jsonData = [
 ];
 
 const InterviewCards = () => {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const filteredData = jsonData.filter((item) => {
     return (
@@ -52,6 +54,8 @@ const InterviewCards = () => {
     );
   });
 
+  const [selectedTitle, setSelectedTitle] = useState('');
+  const {contextQuestions, setContextQuestions } = useAppContext();
   const handleSendTitle = async (title) => {
     // Create a JSON object with the title
     const data = { title };
@@ -71,15 +75,16 @@ const InterviewCards = () => {
       }
   
       const responseData = await response.json();
-      console.log(responseData.message); // Log the response from the backend
-  
+      const receivedQuestions = responseData;
+      setContextQuestions(receivedQuestions);
+      console.log(receivedQuestions,"receivedQuestion"); // Log the response from the backend
+      setSelectedTitle(data);
       // Perform any additional actions as needed
     } catch (error) {
       console.error("Error:", error);
       // Handle any errors
     }
   };
-  
 
   return (
     <div className=" mb-4">
