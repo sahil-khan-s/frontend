@@ -133,10 +133,11 @@ function Page() {
   return (
     <div className="pt-4 ">
       {/* <AudioComponent /> */}
-      <div className="pt-4">
+      <div className=" max-w-[800px]">
       <h2>Question {currentQuestionIndex + 1}</h2>
-      <p>{questionArray[currentQuestionIndex]}</p>
-      <button onClick={handleNextQuestion}>Next</button>
+      <p >{questionArray[currentQuestionIndex]}</p>
+
+      <button className="px-10 rounded-full text-white mt-5 py-2 gradient-text" onClick={handleNextQuestion}>Next</button>
     </div>
       {permissionGranted ? (
         <>
