@@ -60,7 +60,7 @@ const InterviewCards = () => {
     // Create a JSON object with the title
     const data = { title };
   
-    // Send a POST request to your Flask backend
+    // Send a POST request to  Flask backend
     try {
       const response = await fetch("http://localhost:5000/sendTitle", {
         method: "POST",
@@ -77,12 +77,9 @@ const InterviewCards = () => {
       const responseData = await response.json();
       const receivedQuestions = responseData;
       setContextQuestions(receivedQuestions);
-      console.log(receivedQuestions,"receivedQuestion"); // Log the response from the backend
       setSelectedTitle(data);
-      // Perform any additional actions as needed
     } catch (error) {
       console.error("Error:", error);
-      // Handle any errors
     }
   };
 

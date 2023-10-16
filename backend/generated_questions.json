@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the concept of database normalization and why it is important in backend development?",
-    "2. How do you handle data security and ensure that sensitive user information is protected in a backend system?",
-    "3. Can you describe a situation where you had to optimize the performance of a backend application? What steps did you take and what were the results?",
-    "4. How do you approach debugging and troubleshooting in a backend system? Can you provide an example of a challenging bug you encountered and how you resolved it?",
-    "5. In a microservices architecture, how do you ensure communication and coordination between different services? Can you discuss any challenges you have faced in implementing and maintaining such an architecture?"
+    "1. Can you explain the concept of database indexing and how it can optimize query performance?",
+    "2. How would you handle a situation where a database query is running slowly?",
+    "3. Describe a complex bug you encountered in your previous role as a backend developer and how you approached solving it.",
+    "4. How would you design and implement a scalable and efficient system for handling high volumes of incoming data?",
+    "5. Can you discuss the pros and cons of using a microservices architecture versus a monolithic architecture for a backend system?"
 ]
