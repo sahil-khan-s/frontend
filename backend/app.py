@@ -5,6 +5,7 @@ from emotion_recognition import detect_emotions
 from Gaze_recognition import gaze_detection
 from api import api_bp  
 from auth import auth_bp
+from question_gen import generate_questions
 import sqlite3
 app = Flask(__name__)
 CORS(app)
@@ -30,9 +31,10 @@ def handle_card_title():
     try:
         data = request.get_json()
         title = data.get('title')
+        questions = generate_questions(title)
         # Respond with a message or any other data
         response_data = {
-            "message": f"Received title: {title}"
+            "questions": questions
         }
 
         return jsonify(response_data)

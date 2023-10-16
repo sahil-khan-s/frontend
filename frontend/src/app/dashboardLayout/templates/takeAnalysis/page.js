@@ -1,8 +1,9 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder ,unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
-import AudioComponent from "./audio";
+import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
 
 function Page() {
@@ -13,7 +14,8 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
-
+  const { contextQuestions } = useAppContext();
+ 
   // Function to request and initialize the video stream
    useEffect(() => {
     let isMounted = true; // Flag to track if the component is mounted
@@ -42,7 +44,8 @@ function Page() {
     };
   }, []);
   
-
+  const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(''));
+  const [isSpeaking, setIsSpeaking] = useState(false);
   // Function to fetch emotions data
   const [openModal, setOpenModal] = useState(false);
 
@@ -108,10 +111,53 @@ function Page() {
       return;
     }
   };
+ 
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const questionArray = contextQuestions.questions; // Ensure it's an array
+  
+  const playQuestion = () => {
+    if (questionArray && currentQuestionIndex >= 0 && currentQuestionIndex < questionArray.length) {
+      speech.text = questionArray[currentQuestionIndex];
+      window.speechSynthesis.speak(speech);
+      setIsSpeaking(true);
+    }
+  };
+
+  const stopSpeaking = () => {
+    window.speechSynthesis.cancel();
+    setIsSpeaking(false);
+  };
+
+  useEffect(() => {
+    playQuestion();
+  }, [currentQuestionIndex, questionArray, speech]);
+
+  const handleNextQuestion = () => {
+    // if (isSpeaking) {
+    //   // Stop speaking if currently speaking
+    //   stopSpeaking();
+    // } else
+     {
+      if (currentQuestionIndex < questionArray.length - 1) {
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      } else {
+      }
+    }
+  };
+
+  if (!questionArray || questionArray.length === 0) {
+    return <p>Loading questions.....</p>;
+  }
 
   return (
     <div className="pt-4 ">
-      {/* <AudioComponent /> */}
+      <div className=" max-w-[800px]">
+      <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
+      <p className="text-xl">{questionArray[currentQuestionIndex]}</p>
+
+      <button className="px-10 rounded-full text-white my-3 py-2 gradient-text" onClick={handleNextQuestion}>Next</button>
+    </div>
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>
