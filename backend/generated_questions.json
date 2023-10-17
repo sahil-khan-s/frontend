@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the concept of database indexing and how it can optimize query performance?",
-    "2. How would you handle a situation where a database query is running slowly?",
-    "3. Describe a complex bug you encountered in your previous role as a backend developer and how you approached solving it.",
-    "4. How would you design and implement a scalable and efficient system for handling high volumes of incoming data?",
-    "5. Can you discuss the pros and cons of using a microservices architecture versus a monolithic architecture for a backend system?"
+    "1. Can you explain the concept of database normalization and why it is important in backend development?",
+    "2. How do you handle performance optimization in a backend system? Can you provide an example of a specific optimization technique you've implemented in the past?",
+    "3. Have you ever encountered a difficult bug in a production environment? How did you go about troubleshooting and resolving the issue?",
+    "4. How do you approach designing and implementing secure authentication and authorization mechanisms in a backend application?",
+    "5. Can you describe a time when you had to work on a complex integration between multiple backend systems? How did you ensure data consistency and reliability throughout the integration process?"
 ]

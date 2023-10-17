@@ -77,6 +77,7 @@ const InterviewCards = () => {
       const responseData = await response.json();
       const receivedQuestions = responseData;
       setContextQuestions(receivedQuestions);
+      console.log("questions",receivedQuestions)
       setSelectedTitle(data);
     } catch (error) {
       console.error("Error:", error);
