@@ -26,8 +26,5 @@ Follow these steps to set up and run the project on your local machine.
 4. **Start the Development Server:**
    npm run dev
 
-4. **Start the Development Server:**
-    npm install
-
 5. **Check frontend app :**
     http://localhost:3000

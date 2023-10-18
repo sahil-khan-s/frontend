@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { useReactMediaRecorder ,unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
@@ -75,7 +74,9 @@ function Page() {
     }
   };
 
-  //backend logic
+ 
+ 
+
   const handleSend = async () => {
     if (!mediaBlobUrl) {
       console.error("No recorded video to send.");
@@ -130,14 +131,16 @@ function Page() {
   };
 
   useEffect(() => {
-    playQuestion();
+    if (!isSpeaking) {
+      playQuestion();
+    }
   }, [currentQuestionIndex, questionArray, speech]);
 
   const handleNextQuestion = () => {
-    // if (isSpeaking) {
-    //   // Stop speaking if currently speaking
-    //   stopSpeaking();
-    // } else
+    if (isSpeaking) {
+      // Stop speaking if currently speaking
+      stopSpeaking();
+    } else
      {
       if (currentQuestionIndex < questionArray.length - 1) {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -151,12 +154,12 @@ function Page() {
   }
 
   return (
-    <div className="pt-4 ">
+    <div className=" ">
       <div className=" max-w-[800px]">
       <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
-      <p className="text-xl">{questionArray[currentQuestionIndex]}</p>
+      <p className="text-[16px] max-w-[700px]">{questionArray[currentQuestionIndex]}</p>
 
-      <button className="px-10 rounded-full text-white my-3 py-2 gradient-text" onClick={handleNextQuestion}>Next</button>
+      <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion}>{isSpeaking ? 'Stop' : 'Next'}</button>
     </div>
       {permissionGranted ? (
         <>
@@ -170,11 +173,11 @@ function Page() {
               }
             }}
           />
-          <div className="flex justify-center">
+          <div className=" flex justify-center">
             {status !== "recording" ? (
               <button
                 onClick={startRecording}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
+                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
               >
                 Start Recording
               </button>
