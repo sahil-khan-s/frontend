@@ -23,7 +23,7 @@ for backend
 
 
 
-1. **step 1**
+1. **first step**
    activate environment
 
 2. **Navigate to the backend Directory:**
