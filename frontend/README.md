@@ -1,24 +1,12 @@
-# Next.js Frontend App
 
-Welcome to the Next.js frontend application for [Your Project Name].
-
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-- **Node.js:** Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
-
-## Getting Started
-
-Follow these steps to set up and run the project on your local machine.
-
+for frontend
 
 1. **Clone the Repository:**
    ```bash
    git clone <repository_url>
 
-2. **Navigate to the Project Directory:**
-     cd project-directory
+2. **Navigate to the frontend Directory:**
+     cd frontend
 
 3. **Install Dependencies:**
     npm install
@@ -28,3 +16,23 @@ Follow these steps to set up and run the project on your local machine.
 
 5. **Check frontend app :**
     http://localhost:3000
+
+
+
+for backend
+
+
+
+1. **step 1**
+   activate environment
+
+2. **Navigate to the backend Directory:**
+     cd backend 
+
+3. **Install Dependencies:**
+    install requirments
+
+4. **Start the backend Server:**
+   python app.py
+
+
