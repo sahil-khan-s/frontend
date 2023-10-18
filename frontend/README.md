@@ -24,13 +24,13 @@ for backend
 
 
 1. **first step**
-   activate environment
+   activate your environment
 
 2. **Navigate to the backend Directory:**
      cd backend 
 
 3. **Install Dependencies:**
-    install requirments
+    install all requirments
 
 4. **Start the backend Server:**
    python app.py
