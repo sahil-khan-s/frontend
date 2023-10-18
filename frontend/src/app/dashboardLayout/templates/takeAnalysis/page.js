@@ -74,7 +74,9 @@ function Page() {
     }
   };
 
-  //backend logic
+ 
+ 
+
   const handleSend = async () => {
     if (!mediaBlobUrl) {
       console.error("No recorded video to send.");

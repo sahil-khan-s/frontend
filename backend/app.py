@@ -6,6 +6,7 @@ from Gaze_recognition import gaze_detection
 from api import api_bp  
 from auth import auth_bp
 from question_gen import generate_questions
+from transcription import video_transcribe
 import sqlite3
 app = Flask(__name__)
 CORS(app)
@@ -74,16 +75,13 @@ def download():
 @app.route('/detect', methods=['GET'])
 def detect():
     database_path = 'D:\\Development\\interview-buddy\\backend\\database'
-    # emotions_data = []
-    # gaze_data = []
-
     for file in os.listdir(database_path):
         video_file = os.path.join(database_path, file)
         for video in os.listdir(video_file):
             video_path = os.path.join(video_file, video)
             if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
                 emotions = detect_emotions(video_path)
-                gaze = gaze_detection(video_path)
+                gaze = gaze_detection(video_path)               
 
     response = {
         'message': 'Emotions and Gaze tracking detected successfully',
@@ -92,6 +90,30 @@ def detect():
     }
 
     return jsonify(response)
+
+# @app.route('/transcribeVideo', methods=['GET'])
+# def transcribeVideo():
+#     response = {
+#         'message': 'Transcribed successfully',
+#     }
+#     return jsonify(response) recorded_video.webm
+
+@app.route('/transcribeVideo', methods=['GET'])
+def transcribeVideo():
+    database_path = 'D:\\Development\\interview-buddy\\backend\\database\\videos\\video.mp4'
+    transcriptions = []  # Store transcriptions in a list
+
+    transcribe = video_transcribe(database_path)
+    transcriptions.append(transcribe)
+    print(transcriptions, "trans")
+
+    response = {
+        'message': 'Transcribed successfully',
+        'transcriptions': transcriptions,  # Include the list of transcriptions
+    }
+    
+    return jsonify(response)
+
 
 # Register the api_bp Blueprint
 app.register_blueprint(api_bp, url_prefix='/api')

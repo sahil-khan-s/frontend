@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the concept of database normalization and why it is important in backend development?",
-    "2. How do you handle performance optimization in a backend system? Can you provide an example of a specific optimization technique you've implemented in the past?",
-    "3. Have you ever encountered a difficult bug in a production environment? How did you go about troubleshooting and resolving the issue?",
-    "4. How do you approach designing and implementing secure authentication and authorization mechanisms in a backend application?",
-    "5. Can you describe a time when you had to work on a complex integration between multiple backend systems? How did you ensure data consistency and reliability throughout the integration process?"
+    "1. Can you explain the process you would follow to optimize the performance of a database query that is running slowly?",
+    "2. How do you ensure data integrity and consistency in a distributed system?",
+    "3. Can you describe a situation where you had to handle a major system failure or outage? How did you identify and resolve the issue?",
+    "4. How do you approach designing and implementing scalable and highly available systems?",
+    "5. Can you explain the differences between synchronous and asynchronous communication in a distributed system? When would you choose one over the other?"
 ]
