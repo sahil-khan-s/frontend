@@ -93,7 +93,7 @@ def detect():
 
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
-    database_path = 'database/videos/videowm.webm'
+    database_path = 'database/videos/recorded_video.webm'
     video_file = os.path.join(os.getcwd(),database_path)
     transcriptions = []  # Store transcriptions in a list
     transcribe = video_transcribe(video_file)
