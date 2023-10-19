@@ -5,7 +5,7 @@ import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
 
-function Page() {
+const Page = () => {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const { status, startRecording, stopRecording, mediaBlobUrl } =
