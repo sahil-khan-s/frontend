@@ -91,31 +91,19 @@ def detect():
 
     return jsonify(response)
 
-# @app.route('/transcribeVideo', methods=['GET'])
-# def transcribeVideo():
-#     response = {
-#         'message': 'Transcribed successfully',
-#     }
-#     return jsonify(response) recorded_video.webm
-
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
-    database_path = 'D:\\Development\\interview-buddy\\backend\\database'
+    database_path = 'database/videos/videowm.webm'
+    video_file = os.path.join(os.getcwd(),database_path)
     transcriptions = []  # Store transcriptions in a list
-
-    for file in os.listdir(database_path):
-        video_file = os.path.join(database_path, file)
-        for video in os.listdir(video_file):
-            video_path = os.path.join(video_file, video)
-            if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
-                transcribe = video_transcribe(video_path)
-                transcriptions.append(transcribe)
-
+    transcribe = video_transcribe(video_file)
+    print(video_file)
+    transcriptions.append(transcribe)
+    print(transcriptions, "trans")
     response = {
         'message': 'Transcribed successfully',
-        'transcriptions': transcriptions,
+        'transcriptions': transcriptions,  # Include the list of transcriptions
     }
-
     return jsonify(response)
 
 
