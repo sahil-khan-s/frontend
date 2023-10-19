@@ -104,7 +104,7 @@ const InterviewCards = () => {
   return (
     <div className=" mb-4">
       <div className="mb-12 w-[300px] mx-auto">
-        <button className="bg-green-500 text-black p-2 mb-4" onClick={fetchTranscribeData}>Fetch transcribe Data</button>
+        {/* <button className="bg-green-500 text-black p-2 mb-4" onClick={fetchTranscribeData}>Fetch transcribe Data</button> */}
         <div className="relative">
           <input
             type="text"
