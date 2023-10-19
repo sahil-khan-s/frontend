@@ -100,10 +100,13 @@ def detect():
 
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
-    database_path = 'D:\\Development\\interview-buddy\\backend\\database\\videos\\video.mp4'
+    database_path = 'database/videos/1280.webm'
+    video_file = os.path.join(os.getcwd(),database_path)
+
     transcriptions = []  # Store transcriptions in a list
 
-    transcribe = video_transcribe(database_path)
+    transcribe = video_transcribe(video_file)
+    print(video_file)
     transcriptions.append(transcribe)
     print(transcriptions, "trans")
 

@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the process you would follow to optimize the performance of a database query that is running slowly?",
-    "2. How do you ensure data integrity and consistency in a distributed system?",
-    "3. Can you describe a situation where you had to handle a major system failure or outage? How did you identify and resolve the issue?",
-    "4. How do you approach designing and implementing scalable and highly available systems?",
-    "5. Can you explain the differences between synchronous and asynchronous communication in a distributed system? When would you choose one over the other?"
+    "1. Can you explain the process of scaling a backend system to handle high traffic and improve performance? What specific strategies or technologies would you use?",
+    "2. How do you ensure data security and protect against potential vulnerabilities in a backend system? Can you provide examples of security measures you have implemented in previous projects?",
+    "3. Describe a situation where you had to optimize a slow-performing backend application. What steps did you take to identify and resolve the performance bottlenecks?",
+    "4. In a distributed system, how do you handle data consistency and ensure that all nodes are in sync? Can you provide an example of a challenge you faced in maintaining data consistency and how you resolved it?",
+    "5. Have you ever had to deal with a major system outage or failure? How did you approach troubleshooting and resolving the issue? What steps did you take to prevent similar incidents from happening in the future?"
 ]
