@@ -100,19 +100,25 @@ def detect():
 
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
-    database_path = 'D:\\Development\\interview-buddy\\backend\\database\\videos\\video.mp4'
+    database_path = 'D:\\Development\\interview-buddy\\backend\\database'
     transcriptions = []  # Store transcriptions in a list
 
-    transcribe = video_transcribe(database_path)
-    transcriptions.append(transcribe)
-    print(transcriptions, "trans")
+    for file in os.listdir(database_path):
+        video_file = os.path.join(database_path, file)
+        for video in os.listdir(video_file):
+            video_path = os.path.join(video_file, video)
+            if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
+                transcribe = video_transcribe(video_path)
+                transcriptions.append(transcribe)
 
     response = {
         'message': 'Transcribed successfully',
-        'transcriptions': transcriptions,  # Include the list of transcriptions
+        'transcriptions': transcriptions,
     }
-    
+
     return jsonify(response)
+
+
 
 
 # Register the api_bp Blueprint
