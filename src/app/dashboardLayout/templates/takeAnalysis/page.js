@@ -5,7 +5,7 @@ import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
 
-const Page = () => {
+function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const { status, startRecording, stopRecording, mediaBlobUrl } =
@@ -73,6 +73,8 @@ const Page = () => {
       setOpenModal(true);
     }
   };
+
+ 
  
 
   const handleSend = async () => {
@@ -167,7 +169,11 @@ const Page = () => {
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
-                videoElement.play();
+                videoElement.onloadedmetadata = () => {
+                  videoElement.play().catch((error) => {
+                    console.error("Error playing video:", error);
+                  });
+                };
               }
             }}
           />
