@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import RecordRTC from "recordrtc";
+import { useReactMediaRecorder } from "react-media-recorder";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
@@ -8,32 +8,25 @@ import { CircularProgress , Typography} from "@mui/material";
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const [recorder, setRecorder] = useState(null);
-  const [recordedBlob, setRecordedBlob] = useState(null);
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ video: true });
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
-  const [isRecording, setIsRecording] = useState(false);
+ 
   // Function to request and initialize the video stream
-  useEffect(() => {
-    let isMounted = true;
+   useEffect(() => {
+    let isMounted = true; // Flag to track if the component is mounted
 
     const setup = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         
+        // Check if the component is still mounted before updating state
         if (isMounted) {
           setVideoStream(stream);
           setPermissionGranted(true);
-
-          if (stream) {
-            const mediaRecorder = new RecordRTC(stream, {
-              type: "video",
-              mimeType: "video/mp4",
-            });
-            setRecorder(mediaRecorder);
-          }
         }
       } catch (error) {
         console.error("Error accessing camera:", error);
@@ -43,7 +36,7 @@ function Page() {
     setup();
 
     return () => {
-      isMounted = false;
+      isMounted = false; // Component is unmounting, update the flag
       if (videoStream) {
         videoStream.getTracks().forEach((track) => track.stop());
       }
@@ -82,34 +75,20 @@ function Page() {
   };
 
  
-  const startRecording = () => {
-    if (recorder) {
-      setIsRecording(true); // Update recording state
-      recorder.startRecording();
-    }
-  };
-
-  const stopRecording = () => {
-    if (recorder) {
-      setIsRecording(false); // Update recording state
-      recorder.stopRecording(() => {
-        const blob = recorder.getBlob();
-        setRecordedBlob(blob);
-      });
-    }
-  };
-
  
 
   const handleSend = async () => {
-    if (!recordedBlob) {
+    if (!mediaBlobUrl) {
       console.error("No recorded video to send.");
       return;
     }
 
     // Fetch the recorded video as a Blob
+    const response = await fetch(mediaBlobUrl);
+    const blob = await response.blob();
+
     const formData = new FormData();
-    formData.append("video", recordedBlob, "recorded_video.mp4");
+    formData.append("video", blob, "recorded_video.webm");
 
     // Send a POST request to your Flask backend
     try {
@@ -134,8 +113,7 @@ function Page() {
     }
   };
  
-  const { status } = recorder || {};
-  
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const questionArray = contextQuestions.questions; // Ensure it's an array
   
@@ -183,11 +161,11 @@ function Page() {
 
       <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion}>{isSpeaking ? 'Stop' : 'Next'}</button>
     </div>
-    {permissionGranted  && recorder ? (
+      {permissionGranted ? (
         <>
-          <h1 className="font-medium capitalize">Status: {status}</h1>
+          <h1 className="font-medium  capitalize">Status : {status}</h1>
           <video
-            className="pb-4 w-[700px] rounded-xl rounded-b-xl"
+            className=" pb-4 w-[700px] rounded-xl rounded-b-xl"
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
@@ -195,39 +173,35 @@ function Page() {
               }
             }}
           />
-          <div className="flex justify-center">
-           
+          <div className=" flex justify-center">
+            {status !== "recording" ? (
               <button
                 onClick={startRecording}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full"
+                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
               >
                 Start Recording
               </button>
-     
+            ) : (
               <button
                 onClick={stopRecording}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-36 rounded-full"
               >
                 Stop Recording
               </button>
-        
+            )}
           </div>
 
-          {recordedBlob && (
+          {mediaBlobUrl && (
             <div>
               <p className="text-center pt-2">Submit Recorded Video:</p>
             </div>
           )}
           <div className="flex justify-center pt-4 pb-5 ">
-            {loading ? (
-              <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
-                <Typography variant="h5" style={{ color: "white" }}>
-                  Loading
-                </Typography>
-                <CircularProgress
-                  style={{ height: "100px", width: "100px", color: "white" }}
-                />
-              </div>
+            {loading ? ( // Display loader while loading is true
+             <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
+               <Typography variant="h5" style={{ color :"white"}}>Loading</Typography>
+                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
+             </div>
             ) : (
               <button
                 onClick={handleSend}
@@ -239,12 +213,14 @@ function Page() {
             )}
           </div>
 
-          <EmotionModal
-            open={openModal}
-            onClose={() => setOpenModal(false)}
-            emotionsData={emotionsData}
-            gazeData={gazeData}
-          />
+          {openModal && (
+            <EmotionModal
+              open={openModal}
+              onClose={() => setOpenModal(false)}
+              emotionsData={emotionsData}
+              gazeData={gazeData}
+            />
+          )}
         </>
       ) : (
         <p>
