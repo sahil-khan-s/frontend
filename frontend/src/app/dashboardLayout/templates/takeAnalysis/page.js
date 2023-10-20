@@ -1,41 +1,32 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder  } from "react-media-recorder";
+import { useReactMediaRecorder ,unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
 
-export default function page() {
+function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const [mediaChunks, setMediaChunks] = useState([]); // Store recorded media chunks
-  const [recorder, setRecorder] = useState(null);
-  // const { status, startRecording, stopRecording, mediaBlobUrl } =
-  //   useReactMediaRecorder({ video: true });
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ video: true });
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
  
   // Function to request and initialize the video stream
-  useEffect(() => {
-    let isMounted = true;
+   useEffect(() => {
+    let isMounted = true; // Flag to track if the component is mounted
 
     const setup = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
+        
+        // Check if the component is still mounted before updating state
         if (isMounted) {
           setVideoStream(stream);
           setPermissionGranted(true);
-
-          const mediaRecorder = new MediaRecorder(stream);
-          mediaRecorder.ondataavailable = (event) => {
-            if (event.data.size > 0) {
-              setMediaChunks((chunks) => [...chunks, event.data]);
-            }
-          };
-          setRecorder(mediaRecorder);
         }
       } catch (error) {
         console.error("Error accessing camera:", error);
@@ -45,25 +36,13 @@ export default function page() {
     setup();
 
     return () => {
-      isMounted = false;
+      isMounted = false; // Component is unmounting, update the flag
       if (videoStream) {
         videoStream.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
-
-  const handleStartRecording = () => {
-    if (recorder) {
-      setMediaChunks([]); // Clear any previous recorded data
-      recorder.start();
-    }
-  };
-
-  const handleStopRecording = () => {
-    if (recorder && recorder.state === "recording") {
-      recorder.stop();
-    }
-  };
+  
   const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(''));
   const [isSpeaking, setIsSpeaking] = useState(false);
   // Function to fetch emotions data
@@ -94,22 +73,27 @@ export default function page() {
       setOpenModal(true);
     }
   };
+
+ 
  
 
   const handleSend = async () => {
-    if (mediaChunks.length === 0) {
+    if (!mediaBlobUrl) {
       console.error("No recorded video to send.");
       return;
     }
 
-    const mediaBlob = new Blob(mediaChunks, { type: "video/mp4" });
+    // Fetch the recorded video as a Blob
+    const response = await fetch(mediaBlobUrl);
+    const blob = await response.blob();
 
     const formData = new FormData();
-    formData.append("video", mediaBlob, "recorded_video.mp4");
+    formData.append("video", blob, "recorded_video.webm");
 
+    // Send a POST request to your Flask backend
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/upload", {
+      const response = await fetch("http://localhost:5000/download", {
         method: "POST",
         body: formData,
       });
@@ -119,17 +103,15 @@ export default function page() {
       }
 
       const data = await response.json();
-      console.log(data.message);
+      console.log(data.message); // Should print "video downloaded" if the Flask endpoint is working
 
       // Fetch emotions data after sending the video
       fetchEmotionsAndGazeData();
     } catch (error) {
       console.error("Error:", error);
-    } finally {
-      setLoading(false);
+      return;
     }
   };
-
  
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -172,8 +154,6 @@ export default function page() {
   }
 
   return (
-
-  
     <div className=" ">
       <div className=" max-w-[800px]">
       <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
@@ -194,21 +174,21 @@ export default function page() {
             }}
           />
           <div className=" flex justify-center">
-           
+            {status !== "recording" ? (
               <button
-                onClick={handleStartRecording}
+                onClick={startRecording}
                 className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
               >
                 Start Recording
               </button>
-           
+            ) : (
               <button
-                onClick={handleStopRecording}
+                onClick={stopRecording}
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-36 rounded-full"
               >
                 Stop Recording
               </button>
-           
+            )}
           </div>
 
           {mediaBlobUrl && (
@@ -252,3 +232,4 @@ export default function page() {
   );
 }
 
+export default Page;
