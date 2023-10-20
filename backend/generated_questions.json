@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the concept of caching and its importance in backend development? How have you implemented caching in your previous projects, and what challenges did you encounter?",
-    "2. Describe a situation where you had to scale a backend system to handle a significant increase in traffic or user load. What strategies did you implement, and what considerations did you have to take into account?",
-    "3. How do you ensure the security of sensitive data in a backend system? Can you provide examples of security measures you have implemented in previous projects?",
-    "4. Explain the difference between synchronous and asynchronous processing in backend development. When would you choose one approach over the other, and what are the potential benefits and drawbacks of each?",
-    "5. Walk us through a complex debugging scenario you encountered in a previous project. How did you approach the problem, and what tools or techniques did you use to identify and resolve the issue?"
+    "1. Can you explain the difference between synchronous and asynchronous programming and when you would use each approach in a backend development project?",
+    "2. How do you handle database optimization and scalability in a large-scale backend system? Can you provide an example of a problem you encountered and how you resolved it?",
+    "3. Have you ever had to troubleshoot a performance issue in a production environment? How did you identify the problem and what steps did you take to resolve it?",
+    "4. How do you ensure the security of user data in a backend system? Can you describe your approach to handling authentication and authorization in a secure manner?",
+    "5. Can you discuss a time when you had to work with external APIs or third-party services in a backend project? How did you ensure the reliability and stability of these integrations, and how did you handle any issues that arose?"
 ]
