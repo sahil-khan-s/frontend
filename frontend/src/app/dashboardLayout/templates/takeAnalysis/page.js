@@ -1,22 +1,20 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder  } from "react-media-recorder";
+import RecordRTC from "recordrtc";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
 
-export default function page() {
+function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const [mediaChunks, setMediaChunks] = useState([]); // Store recorded media chunks
   const [recorder, setRecorder] = useState(null);
-  // const { status, startRecording, stopRecording, mediaBlobUrl } =
-  //   useReactMediaRecorder({ video: true });
+  const [recordedBlob, setRecordedBlob] = useState(null);
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
- 
+  const [isRecording, setIsRecording] = useState(false);
   // Function to request and initialize the video stream
   useEffect(() => {
     let isMounted = true;
@@ -24,18 +22,18 @@ export default function page() {
     const setup = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
+        
         if (isMounted) {
           setVideoStream(stream);
           setPermissionGranted(true);
 
-          const mediaRecorder = new MediaRecorder(stream);
-          mediaRecorder.ondataavailable = (event) => {
-            if (event.data.size > 0) {
-              setMediaChunks((chunks) => [...chunks, event.data]);
-            }
-          };
-          setRecorder(mediaRecorder);
+          if (stream) {
+            const mediaRecorder = new RecordRTC(stream, {
+              type: "video",
+              mimeType: "video/mp4",
+            });
+            setRecorder(mediaRecorder);
+          }
         }
       } catch (error) {
         console.error("Error accessing camera:", error);
@@ -51,19 +49,7 @@ export default function page() {
       }
     };
   }, []);
-
-  const handleStartRecording = () => {
-    if (recorder) {
-      setMediaChunks([]); // Clear any previous recorded data
-      recorder.start();
-    }
-  };
-
-  const handleStopRecording = () => {
-    if (recorder && recorder.state === "recording") {
-      recorder.stop();
-    }
-  };
+  
   const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(''));
   const [isSpeaking, setIsSpeaking] = useState(false);
   // Function to fetch emotions data
@@ -94,22 +80,41 @@ export default function page() {
       setOpenModal(true);
     }
   };
+
+ 
+  const startRecording = () => {
+    if (recorder) {
+      setIsRecording(true); // Update recording state
+      recorder.startRecording();
+    }
+  };
+
+  const stopRecording = () => {
+    if (recorder) {
+      setIsRecording(false); // Update recording state
+      recorder.stopRecording(() => {
+        const blob = recorder.getBlob();
+        setRecordedBlob(blob);
+      });
+    }
+  };
+
  
 
   const handleSend = async () => {
-    if (mediaChunks.length === 0) {
+    if (!recordedBlob) {
       console.error("No recorded video to send.");
       return;
     }
 
-    const mediaBlob = new Blob(mediaChunks, { type: "video/mp4" });
-
+    // Fetch the recorded video as a Blob
     const formData = new FormData();
-    formData.append("video", mediaBlob, "recorded_video.mp4");
+    formData.append("video", recordedBlob, "recorded_video.mp4");
 
+    // Send a POST request to your Flask backend
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/upload", {
+      const response = await fetch("http://localhost:5000/download", {
         method: "POST",
         body: formData,
       });
@@ -119,19 +124,18 @@ export default function page() {
       }
 
       const data = await response.json();
-      console.log(data.message);
+      console.log(data.message); // Should print "video downloaded" if the Flask endpoint is working
 
       // Fetch emotions data after sending the video
       fetchEmotionsAndGazeData();
     } catch (error) {
       console.error("Error:", error);
-    } finally {
-      setLoading(false);
+      return;
     }
   };
-
  
-
+  const { status } = recorder || {};
+  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const questionArray = contextQuestions.questions; // Ensure it's an array
   
@@ -172,8 +176,6 @@ export default function page() {
   }
 
   return (
-
-  
     <div className=" ">
       <div className=" max-w-[800px]">
       <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
@@ -181,11 +183,11 @@ export default function page() {
 
       <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion}>{isSpeaking ? 'Stop' : 'Next'}</button>
     </div>
-      {permissionGranted ? (
+    {permissionGranted  && recorder ? (
         <>
-          <h1 className="font-medium  capitalize">Status : {status}</h1>
+          <h1 className="font-medium capitalize">Status: {status}</h1>
           <video
-            className=" pb-4 w-[700px] rounded-xl rounded-b-xl"
+            className="pb-4 w-[700px] rounded-xl rounded-b-xl"
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
@@ -193,35 +195,39 @@ export default function page() {
               }
             }}
           />
-          <div className=" flex justify-center">
+          <div className="flex justify-center">
            
               <button
-                onClick={handleStartRecording}
-                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
+                onClick={startRecording}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full"
               >
                 Start Recording
               </button>
-           
+     
               <button
-                onClick={handleStopRecording}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-36 rounded-full"
+                onClick={stopRecording}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full"
               >
                 Stop Recording
               </button>
-           
+        
           </div>
 
-          {mediaBlobUrl && (
+          {recordedBlob && (
             <div>
               <p className="text-center pt-2">Submit Recorded Video:</p>
             </div>
           )}
           <div className="flex justify-center pt-4 pb-5 ">
-            {loading ? ( // Display loader while loading is true
-             <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
-               <Typography variant="h5" style={{ color :"white"}}>Loading</Typography>
-                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
-             </div>
+            {loading ? (
+              <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
+                <Typography variant="h5" style={{ color: "white" }}>
+                  Loading
+                </Typography>
+                <CircularProgress
+                  style={{ height: "100px", width: "100px", color: "white" }}
+                />
+              </div>
             ) : (
               <button
                 onClick={handleSend}
@@ -233,14 +239,12 @@ export default function page() {
             )}
           </div>
 
-          {openModal && (
-            <EmotionModal
-              open={openModal}
-              onClose={() => setOpenModal(false)}
-              emotionsData={emotionsData}
-              gazeData={gazeData}
-            />
-          )}
+          <EmotionModal
+            open={openModal}
+            onClose={() => setOpenModal(false)}
+            emotionsData={emotionsData}
+            gazeData={gazeData}
+          />
         </>
       ) : (
         <p>
@@ -252,3 +256,4 @@ export default function page() {
   );
 }
 
+export default Page;

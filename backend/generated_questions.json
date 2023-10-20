@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the difference between synchronous and asynchronous programming and when you would use each approach in a backend development project?",
-    "2. How do you handle database optimization and scalability in a large-scale backend system? Can you provide an example of a problem you encountered and how you resolved it?",
-    "3. Have you ever had to troubleshoot a performance issue in a production environment? How did you identify the problem and what steps did you take to resolve it?",
-    "4. How do you ensure the security of user data in a backend system? Can you describe your approach to handling authentication and authorization in a secure manner?",
-    "5. Can you discuss a time when you had to work with external APIs or third-party services in a backend project? How did you ensure the reliability and stability of these integrations, and how did you handle any issues that arose?"
+    "1. Can you explain the concept of database indexing and how it affects query performance? How would you optimize database queries for faster response times?",
+    "2. How would you handle a situation where a critical backend service goes down? What steps would you take to troubleshoot and resolve the issue as quickly as possible?",
+    "3. Can you describe a complex technical problem you have faced in the past and how you went about solving it? What tools or strategies did you use to debug and fix the issue?",
+    "4. How would you ensure data security and integrity in a distributed system? What measures would you take to prevent unauthorized access or data breaches?",
+    "5. Can you discuss a time when you had to scale a backend system to handle a significant increase in user traffic or data volume? What approaches did you take to ensure the system could handle the increased load without compromising performance or stability?"
 ]
