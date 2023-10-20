@@ -74,7 +74,7 @@ def download():
 
 @app.route('/detect', methods=['GET'])
 def detect():
-    database_path = 'D:\\Development\\interview-buddy\\backend\\database'
+    database_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/1280.webm'
     for file in os.listdir(database_path):
         video_file = os.path.join(database_path, file)
         for video in os.listdir(video_file):
@@ -94,7 +94,8 @@ def detect():
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
     database_path = 'database/videos/recorded_video.webm'
-    video_file = os.path.join(os.getcwd(),database_path)
+    cwd = os.getcwd()
+    video_file = os.path.join(cwd,database_path)
     transcriptions = []  # Store transcriptions in a list
     transcribe = video_transcribe(video_file)
     print(video_file)
