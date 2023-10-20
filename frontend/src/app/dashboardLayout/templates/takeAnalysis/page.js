@@ -169,7 +169,11 @@ function Page() {
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
-                videoElement.play();
+                videoElement.onloadedmetadata = () => {
+                  videoElement.play().catch((error) => {
+                    console.error("Error playing video:", error);
+                  });
+                };
               }
             }}
           />
