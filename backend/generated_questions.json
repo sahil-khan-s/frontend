@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the concept of database indexing and how it affects query performance? How would you optimize database queries for faster response times?",
-    "2. How would you handle a situation where a critical backend service goes down? What steps would you take to troubleshoot and resolve the issue as quickly as possible?",
-    "3. Can you describe a complex technical problem you have faced in the past and how you went about solving it? What tools or strategies did you use to debug and fix the issue?",
-    "4. How would you ensure data security and integrity in a distributed system? What measures would you take to prevent unauthorized access or data breaches?",
-    "5. Can you discuss a time when you had to scale a backend system to handle a significant increase in user traffic or data volume? What approaches did you take to ensure the system could handle the increased load without compromising performance or stability?"
+    "1. Can you describe a time when you faced a significant marketing challenge and how you overcame it?",
+    "2. How do you stay up-to-date with the latest marketing trends and technologies? Give an example of how you implemented a new marketing strategy based on emerging trends.",
+    "3. In a highly competitive market, how would you differentiate our product or service from our competitors? Provide specific strategies or tactics you would use.",
+    "4. Describe a situation where you had to manage a tight marketing budget while still achieving desired results. How did you prioritize spending and optimize resources?",
+    "5. How do you measure the success of a marketing campaign? Provide an example of a campaign you executed and the metrics you used to evaluate its success."
 ]
