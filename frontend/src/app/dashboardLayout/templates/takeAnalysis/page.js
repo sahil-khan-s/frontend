@@ -4,16 +4,18 @@ import { useReactMediaRecorder ,unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
-
+import PauseCircleFilledRoundedIcon from '@mui/icons-material/PauseCircleFilledRounded';
+import PlayCircleFilledRoundedIcon from '@mui/icons-material/PlayCircleFilledRounded';
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const { status, startRecording, stopRecording, mediaBlobUrl  } =
+  const { status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl  } =
   useReactMediaRecorder({ video: true });
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
+  const [recording, setRecording] = useState(true);
  
   // Function to request and initialize the video stream
    useEffect(() => {
@@ -73,9 +75,6 @@ function Page() {
       setOpenModal(true);
     }
   };
-
- 
- 
 
   const handleSend = async () => {
     if (!mediaBlobUrl) {
@@ -152,7 +151,14 @@ function Page() {
   // if (!questionArray || questionArray.length === 0) {
   //   return <p>Loading questions.....</p>;
   // }
-
+  const toggleRecording = () => {
+    if (recording) {
+      pauseRecording();
+    } else {
+      resumeRecording();
+    }
+    setRecording(!recording);
+  };
   return (
     <div className=" ">
       {/* <div className=" max-w-[800px]">
@@ -163,6 +169,8 @@ function Page() {
     </div> */}
       {permissionGranted ? (
         <>
+        <div className="relative">
+        <div className="">
           <h1 className="font-medium  capitalize">Status : {status}</h1>
           <video
             className=" pb-4 w-[700px] rounded-xl rounded-b-xl"
@@ -173,8 +181,18 @@ function Page() {
               }
             }}
           />
+        </div>
+        <div className="flex gap-4 absolute bottom-[30px] left-[45%]">
+          {/* <PauseCircleFilledRoundedIcon className="text-white" />
+          <PlayCircleFilledRoundedIcon className="text-white"/> */}
+        <button className="text-white" onClick={toggleRecording}>
+          {recording ? <PauseCircleFilledRoundedIcon className="text-white" /> :<PlayCircleFilledRoundedIcon className="text-white"/>}
+        </button>
+         </div>
+        </div>
+
           <div className=" flex justify-center">
-            {status !== "recording" ? (
+            {status !== "recording"  ? (
               <button
                 onClick={startRecording}
                 className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
