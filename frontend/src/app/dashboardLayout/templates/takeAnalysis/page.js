@@ -1,28 +1,30 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder ,unregister } from "react-media-recorder";
+import { useReactMediaRecorder, unregister } from "react-media-recorder";
 import EmotionModal from "./modal";
-import { useAppContext } from '../../../context/AppContext';
-import { CircularProgress , Typography} from "@mui/material";
+import { useAppContext } from "../../../context/AppContext";
+import { CircularProgress, Typography } from "@mui/material";
 
 function Page() {
   const [videoStream, setVideoStream] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const { status, startRecording, stopRecording, mediaBlobUrl  } =
-  useReactMediaRecorder({ video: true });
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ video: true });
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
- 
+
   // Function to request and initialize the video stream
-   useEffect(() => {
+  useEffect(() => {
     let isMounted = true; // Flag to track if the component is mounted
 
     const setup = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+
         // Check if the component is still mounted before updating state
         if (isMounted) {
           setVideoStream(stream);
@@ -42,8 +44,8 @@ function Page() {
       }
     };
   }, []);
-  
-  const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(''));
+
+  const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(""));
   const [isSpeaking, setIsSpeaking] = useState(false);
   // Function to fetch emotions data
   const [openModal, setOpenModal] = useState(false);
@@ -63,7 +65,7 @@ function Page() {
       const data = await response.json();
       const gazeData = JSON.parse(data.gaze_tracking);
       const emotionsData = JSON.parse(data.emotions);
-      console.log(data , "ddd");
+      console.log(data, "ddd");
       setEmotionsData(emotionsData);
       SetGazeData(gazeData); // Set gazeData state
     } catch (error) {
@@ -73,9 +75,6 @@ function Page() {
       setOpenModal(true);
     }
   };
-
- 
- 
 
   const handleSend = async () => {
     if (!mediaBlobUrl) {
@@ -112,55 +111,65 @@ function Page() {
       return;
     }
   };
- 
 
-  // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  // const questionArray = contextQuestions.questions; // Ensure it's an array
-  
-  // const playQuestion = () => {
-  //   if (questionArray && currentQuestionIndex >= 0 && currentQuestionIndex < questionArray.length) {
-  //     speech.text = questionArray[currentQuestionIndex];
-  //     window.speechSynthesis.speak(speech);
-  //     setIsSpeaking(true);
-  //   }
-  // };
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const questionArray = contextQuestions.questions; // Ensure it's an array
 
-  // const stopSpeaking = () => {
-  //   window.speechSynthesis.cancel();
-  //   setIsSpeaking(false);
-  // };
+  const playQuestion = () => {
+    if (
+      questionArray &&
+      currentQuestionIndex >= 0 &&
+      currentQuestionIndex < questionArray.length
+    ) {
+      speech.text = questionArray[currentQuestionIndex];
+      window.speechSynthesis.speak(speech);
+      setIsSpeaking(true);
+    }
+  };
 
-  // useEffect(() => {
-  //   if (!isSpeaking) {
-  //     playQuestion();
-  //   }
-  // }, [currentQuestionIndex, questionArray, speech]);
+  const stopSpeaking = () => {
+    window.speechSynthesis.cancel();
+    setIsSpeaking(false);
+  };
 
-  // const handleNextQuestion = () => {
-  //   if (isSpeaking) {
-  //     // Stop speaking if currently speaking
-  //     stopSpeaking();
-  //   } else
-  //    {
-  //     if (currentQuestionIndex < questionArray.length - 1) {
-  //       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  //     } else {
-  //     }
-  //   }
-  // };
+  useEffect(() => {
+    if (!isSpeaking) {
+      playQuestion();
+    }
+  }, [currentQuestionIndex, questionArray, speech]);
 
-  // if (!questionArray || questionArray.length === 0) {
-  //   return <p>Loading questions.....</p>;
-  // }
+  const handleNextQuestion = () => {
+    if (isSpeaking) {
+      // Stop speaking if currently speaking
+      stopSpeaking();
+    } else {
+      if (currentQuestionIndex < questionArray.length - 1) {
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      } else {
+      }
+    }
+  };
+
+  if (!questionArray || questionArray.length === 0) {
+    return <p>Loading questions.....</p>;
+  }
 
   return (
     <div className=" ">
-      {/* <div className=" max-w-[800px]">
-      <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
-      <p className="text-[16px] max-w-[700px]">{questionArray[currentQuestionIndex]}</p>
-
-      <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion}>{isSpeaking ? 'Stop' : 'Next'}</button>
-    </div> */}
+      <div className=" max-w-[800px]">
+        <h2 className="font-bold py-2 text-xl ">
+          Question {currentQuestionIndex + 1}
+        </h2>
+        <p className="text-[16px] max-w-[700px]">
+          {questionArray[currentQuestionIndex]}
+        </p>
+        <button
+          className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400"
+          onClick={handleNextQuestion}
+        >
+          {isSpeaking ? "Stop" : "Next"}
+        </button>
+      </div>
       {permissionGranted ? (
         <>
           <h1 className="font-medium  capitalize">Status : {status}</h1>
@@ -198,10 +207,14 @@ function Page() {
           )}
           <div className="flex justify-center pt-4 pb-5 ">
             {loading ? ( // Display loader while loading is true
-             <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
-               <Typography variant="h5" style={{ color :"white"}}>Loading</Typography>
-                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
-             </div>
+              <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
+                <Typography variant="h5" style={{ color: "white" }}>
+                  Loading
+                </Typography>
+                <CircularProgress
+                  style={{ height: "100px", width: "100px", color: "white" }}
+                />
+              </div>
             ) : (
               <button
                 onClick={handleSend}
