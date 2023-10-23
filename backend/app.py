@@ -17,6 +17,8 @@ app.secret_key = 'your_secret_key'
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'database', 'videos')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+
 # Initialize the SQLite database connection
 @app.before_request
 def before_request():
@@ -27,6 +29,9 @@ def teardown_request(exception):
     if hasattr(g, 'db_connection'):
         g.db_connection.close()
 
+
+
+# Handle incoming POST request for generating questions based on title
 @app.route('/sendTitle', methods=['POST'])
 def handle_card_title():
     try:
@@ -43,6 +48,9 @@ def handle_card_title():
         print("Error:", str(e))
         return jsonify({"error": "An error occurred"})
 
+
+
+# Handle GET request to display the list of registerd users at localHost:500/get_users
 @app.route('/get_users', methods=['GET'])
 def get_users():
     conn = sqlite3.connect(app.config['DATABASE'])
@@ -50,7 +58,6 @@ def get_users():
     cursor.execute("SELECT * FROM users")
     users = cursor.fetchall()
     conn.close()
-
     user_list = []
     for user in users:
         user_dict = {
@@ -64,6 +71,8 @@ def get_users():
     return jsonify(user_list)
 
 
+
+# Handle POST request to save recorded video at database/videos folder that is comming from frontend .
 @app.route('/download', methods=['POST'])
 def download():
     file = request.files['video']
@@ -72,6 +81,9 @@ def download():
     response = {'message': 'Video downloaded'}
     return jsonify(response)
 
+
+
+# Handle GET request to send emotions and gaze-tracking response to frontend after applying functions for emotion and gaze detection
 @app.route('/detect', methods=['GET'])
 def detect():
     database_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/'
@@ -91,6 +103,9 @@ def detect():
 
     return jsonify(response)
 
+
+
+# Handle GET request to  transcribe recorded video and return extracted text from video .
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
     database_path = 'database/videos/recorded_video.webm'
