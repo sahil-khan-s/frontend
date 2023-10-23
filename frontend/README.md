@@ -39,3 +39,38 @@ for backend
 
 
 
+
+
+
+/////////////////////////////////////
+
+
+
+ local deployement through github
+
+### Step 1: Create a New GitHub Repository
+
+1. Create a new GitHub repository through the GitHub .
+2. Provide the repository name,
+3. Click 'Create repository'.
+
+### Step 2: Adding the New Repository to Your Project
+
+1. cd frontend
+2. git init
+3. git remote add origin <repository_url>
+4. git branch -M main
+5. git add .
+6. git commit -m "Initial commit"
+7. git push -u origin main
+
+###  step 3: deployement on vercel 
+1. login vercel through github 
+2. on dashboard click on addNew button and then select project
+3. chose current repository of your project and import 
+4. click on deploy and it starts deplying 
+
+
+
+
+

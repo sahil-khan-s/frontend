@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder ,unregister } from "react-media-recorder";
+import { useReactMediaRecorder  } from "react-media-recorder";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
