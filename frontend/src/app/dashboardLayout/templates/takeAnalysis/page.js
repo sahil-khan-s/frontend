@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder ,unregister } from "react-media-recorder";
+import { useReactMediaRecorder  } from "react-media-recorder";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
@@ -169,7 +169,11 @@ function Page() {
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
-                videoElement.play();
+                videoElement.onloadedmetadata = () => {
+                  videoElement.play().catch((error) => {
+                    console.error("Error playing video:", error);
+                  });
+                };
               }
             }}
           />

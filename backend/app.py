@@ -86,7 +86,7 @@ def download():
 # Handle GET request to send emotions and gaze-tracking response to frontend after applying functions for emotion and gaze detection
 @app.route('/detect', methods=['GET'])
 def detect():
-    database_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/'
+    database_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/1280.webm'
     for file in os.listdir(database_path):
         video_file = os.path.join(database_path, file)
         for video in os.listdir(video_file):
