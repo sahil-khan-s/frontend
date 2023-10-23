@@ -104,7 +104,7 @@ const InterviewCards = () => {
   return (
     <div className=" mb-4">
       <div className="mb-12 w-[300px] mx-auto">
-        <button className="bg-green-500 text-black p-2 mb-4" onClick={fetchTranscribeData}>Fetch transcribe Data</button>
+        {/* <button className="bg-green-500 text-black p-2 mb-4" onClick={fetchTranscribeData}>Fetch transcribe Data</button> */}
         <div className="relative">
           <input
             type="text"
@@ -124,7 +124,7 @@ const InterviewCards = () => {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 gap-4">
+      <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 gap-4">
         {filteredData.map((item, index) => (
           <div key={index} className="card">
             <h2 className="font-bold text-2xl">{item.title}</h2>
