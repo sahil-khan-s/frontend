@@ -2,10 +2,10 @@ import moviepy.editor as mp
 import os
 import whisper
 import ffmpeg
-def video_transcribe(vidio_path):
+def video_transcribe(video_path):
     #converting input webm video to mp4 format
-    output_video_file = vidio_path.split('.')[0] + ".mp4"
-    ffmpeg.input(vidio_path, f='webm') \
+    output_video_file = video_path.split('.')[0] + ".mp4"
+    ffmpeg.input(video_path, f='webm') \
     .output(output_video_file, vcodec='libx264', acodec='aac') \
     .run()
     print(f'Video converted and saved as {output_video_file}')
