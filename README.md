@@ -27,7 +27,9 @@ for backend
 python version =  3.10.11
 
 1. **first step**
-   activate your environment
+   create your environment  with python version 3.10.11
+
+   Activate your environment
 
 2. **Install Dependencies:**
     install all requirments by running this command " pip install -r requirements.txt "
