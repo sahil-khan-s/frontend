@@ -1,7 +1,7 @@
 [
-    "1. Can you explain the concept of database indexing and how it can improve the performance of a backend application?",
-    "2. How do you handle database migrations and version control in your backend development process?",
-    "3. Describe a situation where you had to optimize the performance of a backend application. What steps did you take and what were the results?",
-    "4. Can you explain the difference between synchronous and asynchronous programming, and when would you choose one over the other in a backend application?",
-    "5. How do you handle error handling and logging in your backend applications, and can you provide an example of a challenging debugging situation you encountered and how you resolved it?"
+    "1. Can you explain the process you would follow to optimize a slow-performing database query?",
+    "2. How would you ensure the security of sensitive data in a backend system? Can you provide an example of how you have implemented security measures in the past?",
+    "3. Describe a situation where you had to troubleshoot and resolve a complex backend issue. How did you approach the problem, and what was the outcome?",
+    "4. How do you handle concurrent requests and ensure data consistency in a distributed system?",
+    "5. Can you discuss a project where you had to integrate multiple third-party APIs into a backend system? What challenges did you face, and how did you overcome them?"
 ]

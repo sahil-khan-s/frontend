@@ -1,22 +1,29 @@
-import moviepy.editor as mp
 import os
 import whisper
 import ffmpeg
+import subprocess
+
 def video_transcribe(video_path):
-    #converting input webm video to mp4 format
+    # Converting input webm video to mp4 format
     output_video_file = video_path.split('.')[0] + ".mp4"
-    ffmpeg.input(video_path, f='webm') \
-    .output(output_video_file, vcodec='libx264', acodec='aac') \
-    .run()
+    
+    input_file = ffmpeg.input(video_path, f='webm')
+    ffmpeg.output(input_file, output_video_file, vcodec='libx264', acodec='aac').run()
+    
     print(f'Video converted and saved as {output_video_file}')
-    video_file = os.path.join(os.getcwd(),output_video_file)
+    
+    video_file = os.path.join(os.getcwd(), output_video_file)
     temp_audio_file = output_video_file.split('.')[0] + ".wav"
+    
     # Extract the audio from the video
-    video_clip = mp.VideoFileClip(video_file)
-    video_clip.audio.write_audiofile(temp_audio_file)
+    input_file = ffmpeg.input(video_file)
+    ffmpeg.output(input_file.audio, temp_audio_file).run()
+    
     # Transcribe the audio to text
     model = whisper.load_model("base.en")
-    result = model.transcribe(os.path.join(os.getcwd(),output_video_file))
-    #print(result["text"])
+    result = model.transcribe(os.path.join(os.getcwd(), temp_audio_file))
+    
+    # Remove temporary audio file
     os.remove(temp_audio_file)
+    
     return result["text"]
