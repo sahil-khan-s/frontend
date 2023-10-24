@@ -18,7 +18,7 @@ def evaluate_answer(question, answer):
         {"role": "assistant", "content": "Score:"}
     ]
 
-    # Send a request to ChatGPT using the conversation as input
+   # Send a request to ChatGPT using the conversation as input
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=conversation

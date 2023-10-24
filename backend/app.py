@@ -86,7 +86,7 @@ def download():
 # Handle GET request to send emotions and gaze-tracking response to frontend after applying functions for emotion and gaze detection
 @app.route('/detect', methods=['GET'])
 def detect():
-    database_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/1280.webm'
+    database_path = 'D:\\Development\\interview-buddy\\backend\\database'
     for file in os.listdir(database_path):
         video_file = os.path.join(database_path, file)
         for video in os.listdir(video_file):
@@ -108,7 +108,7 @@ def detect():
 # Handle GET request to  transcribe recorded video and return extracted text from video .
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
-    database_path = 'D:\\Development\\interview-buddy\\backend\\database\\videos\\video.mp4'
+    database_path = 'D:\\Development\\interview-buddy\\backend\\database\\videos\\recorded_video.webm'
     transcriptions = []  # Store transcriptions in a list
 
     transcribe = video_transcribe(database_path)

@@ -1,15 +1,18 @@
 import moviepy.editor as mp
 import os
 import whisper
-import os
-def video_transcribe(video_path):
-
+import ffmpeg
+def video_transcribe(vidio_path):
+    #converting input webm video to mp4 format
+    output_video_file = vidio_path.split('.')[0] + ".mp4"
+    ffmpeg.input(vidio_path, f='webm') \
+    .output(output_video_file, vcodec='libx264', acodec='aac') \
+    .run()
+    print(f'Video converted and saved as {output_video_file}')
+    video_file = os.path.join(os.getcwd(),output_video_file)
+    temp_audio_file = output_video_file.split('.')[0] + ".wav"
     # Extract the audio from the video
-    video_file = os.path.join(os.getcwd(),video_path)
-    temp_audio_file = video_path.split('.')[0] + ".wav"
-    # Extract the audio from the video
-    
-    video_clip = mp.VideoFileClip(video_path)
+    video_clip = mp.VideoFileClip(video_file)
     video_clip.audio.write_audiofile(temp_audio_file)
     # Transcribe the audio to text
     model = whisper.load_model("base.en")
