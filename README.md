@@ -2,8 +2,9 @@
    git clone <repository_url>
 
 
-first install node.js if you haven't installed  "https://nodejs.org/en"  18.18.2 LTS
+first install node.js globally if you haven't installed  "https://nodejs.org/en"  v18.16.1  or latest version should work (LTS)
 
+Then open project folder and open terminal
 
 for frontend 
 
@@ -11,7 +12,7 @@ for frontend
      cd frontend
 
 2. **Install Dependencies:**
-    npm install   or npm i 
+    npm install   or npm i           //It will install all dependencies for frontend app
 
 3. **Start the Development Server:**
    npm run dev
@@ -23,7 +24,7 @@ for frontend
 
 for backend
 
-
+python version =  3.10.11
 
 1. **first step**
    activate your environment
