@@ -4,10 +4,10 @@ import Link from 'next/link'
 import devsort from '../../../../public/assets/images/devsort.png'
 function Header() {
   return (
-    <div className=''>
+    <div className='bg-white  opacity-[0.9]'>
 
    
-    <div className=' bg-white fixed opacity-[0.9]  mx-auto container 2xl:max-w-container xl:px-[128px]'>
+    <div className='   mx-auto container 2xl:max-w-container xl:px-[128px]'>
         <nav className=" py-4 flex justify-between  items-center ">
       <div className="flex items-center">
         <Image src={devsort} alt="Logo" width={170} height={100} className="" />

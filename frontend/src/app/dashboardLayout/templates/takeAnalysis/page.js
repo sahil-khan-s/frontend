@@ -16,6 +16,7 @@ function Page() {
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
   const [recording, setRecording] = useState(true);
+  const [sendQuestion , setSendQuestion] = useState(null);
  
   // Function to request and initialize the video stream
    useEffect(() => {
@@ -130,14 +131,17 @@ function Page() {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const questionArray = contextQuestions.questions; // Ensure it's an array
- 
+
+
   const playQuestion = () => {
     if (questionArray && currentQuestionIndex >= 0 && currentQuestionIndex < questionArray.length) {
       speech.text = questionArray[currentQuestionIndex];
       window.speechSynthesis.speak(speech);
+      setSendQuestion( questionArray[currentQuestionIndex]);
       setIsSpeaking(true);
     }
   };
+
 
   const stopSpeaking = () => {
     window.speechSynthesis.cancel();
@@ -174,6 +178,30 @@ function Page() {
     }
     setRecording(!recording);
   };
+
+  const sendQuestionToBackend = async () => {
+    try {
+      if (sendQuestion) {
+        const response = await fetch('http://localhost:5000/receiveQuestion', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ question: sendQuestion }),
+        });
+  
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData.message); // Print the response message from the backend
+        } else {
+          throw new Error('Request failed');
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
   return (
     <div className=" ">
       <div className=" max-w-[800px]">
@@ -233,12 +261,14 @@ function Page() {
           <div className="flex justify-center pt-4 pb-5 ">
             {loading ? ( // Display loader while loading is true
              <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
-               <Typography variant="h5" style={{ color :"white"}}>Loading</Typography>
-                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
+                <CircularProgress style={{height:"100px" , width:"100px" , color :"blue"}}  />
              </div>
             ) : (
               <button
-                onClick={handleSend}
+                onClick={()=>{
+                  handleSend()
+                  sendQuestionToBackend()
+                }}
                 disabled={loading}
                 className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
               >
@@ -246,7 +276,11 @@ function Page() {
               </button>
             )}
           </div>
-           <button className="bg-red-500 mb-5" onClick={fetchTranscribeData}>transcribed</button>
+
+
+           {/* <button className="bg-red-500 mb-5 p-2" onClick={fetchTranscribeData}>fetchTranscribeData</button> */}
+
+           
           {openModal && (
             <EmotionModal
               open={openModal}
