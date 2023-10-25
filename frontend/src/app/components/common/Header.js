@@ -5,8 +5,6 @@ import devsort from '../../../../public/assets/images/devsort.png'
 function Header() {
   return (
     <div className='bg-white  opacity-[0.9]'>
-
-   
     <div className='   mx-auto container 2xl:max-w-container xl:px-[128px]'>
         <nav className=" py-4 flex justify-between  items-center ">
       <div className="flex items-center">
