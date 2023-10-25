@@ -2,7 +2,7 @@ import moviepy.editor as mp
 import os
 import whisper
 import ffmpeg
-​
+
 def video_transcribe(video_path):
     #converting input webm video to mp4 format
     output_video_file = video_path.split('.')[0] + ".mp4"
@@ -16,7 +16,7 @@ def video_transcribe(video_path):
     video_clip = mp.VideoFileClip(video_file)
     video_clip.audio.write_audiofile(temp_audio_file)
     # Transcribe the audio to text
-    model = whisper.load_model("base.en")
+    model = whisper.load_model("base.en")  
     result = model.transcribe(os.path.join(os.getcwd(),output_video_file))
     #print(result["text"])
     os.remove(temp_audio_file)
