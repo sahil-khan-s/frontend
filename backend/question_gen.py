@@ -8,7 +8,7 @@ def generate_questions(title):
     openai.api_key = api_key
 
     # Define the prompt and payload
-    text = "Generate five interview tough Questions  for "
+    text = "Generate five interview Questions for job title: "
     template = title
     payload = {
         "messages": [

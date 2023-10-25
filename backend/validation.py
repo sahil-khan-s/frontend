@@ -1,12 +1,15 @@
 import openai
+from transcription import video_transcribe
 import re
 
+
 def evaluate_answer(question, answer):
-    # Set your API key
-    api_key = "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"  # Replace with your actual API key
+    
+    #API key
+    api_key = "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"
     openai.api_key = api_key
 
-    # Set the conversation structure
+    #Prompt structure
     conversation = [
         {"role": "system", "content": "You are an answer evaluator. Please evaluate the score for the following answer using a scale of 1 to 100, where 1 is the lowest and 100 is the highest, based on the following qualities:"},
         {"role": "system", "content": "- Accuracy: How much the answer is correct in relation to the question."},
@@ -18,7 +21,7 @@ def evaluate_answer(question, answer):
         {"role": "assistant", "content": "Score:"}
     ]
 
-   # Send a request to ChatGPT using the conversation as input
+    # Send a request to ChatGPT using the conversation as input
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=conversation
