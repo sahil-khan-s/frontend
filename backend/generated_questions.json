@@ -1,7 +1,7 @@
 [
-    "1. Can you describe your experience in developing and implementing marketing strategies to drive business growth? Provide specific examples of successful campaigns you have worked on.",
-    "2. How do you stay updated on the latest marketing trends and technologies? How would you apply this knowledge to enhance our company's marketing efforts?",
-    "3. Can you discuss your approach to market research and analysis? How would you use this data to identify target audiences and create effective marketing campaigns?",
-    "4. In your previous role, how did you measure the success of your marketing initiatives? What metrics did you use, and how did you use this information to make data-driven decisions?",
-    "5. Collaboration is key in a marketing team. Can you provide an example of a successful cross-functional project you led or participated in? How did you effectively communicate and collaborate with team members from different departments?"
+    "1. Can you explain the difference between supervised and unsupervised learning? Can you provide examples of each and explain when you would use each approach?",
+    "2. How do you handle imbalanced datasets in machine learning? Can you provide some techniques or algorithms that can be used to address this issue?",
+    "3. Can you discuss the bias-variance tradeoff in machine learning? How do you determine the optimal balance between bias and variance in a model?",
+    "4. How do you handle missing data in a dataset? Can you discuss some common techniques for imputing missing values and explain when each technique would be appropriate?",
+    "5. Can you explain the process of feature selection in machine learning? How do you determine which features are most important for a given problem and what techniques or algorithms do you use to select those features?"
 ]
