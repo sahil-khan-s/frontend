@@ -8,6 +8,7 @@ from auth import auth_bp
 from question_gen import generate_questions
 from transcription import video_transcribe
 import sqlite3
+
 app = Flask(__name__)
 CORS(app)
 app.config['SESSION_TYPE'] = 'filesystem'  # Use filesystem session storage
@@ -86,14 +87,10 @@ def download():
 # Handle GET request to send emotions and gaze-tracking response to frontend after applying functions for emotion and gaze detection
 @app.route('/detect', methods=['GET'])
 def detect():
-    database_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/'
-    for file in os.listdir(database_path):
-        video_file = os.path.join(database_path, file)
-        for video in os.listdir(video_file):
-            video_path = os.path.join(video_file, video)
-            if video_path.endswith(('.mp4', '.avi', '.mov', '.webm')):
-                emotions = detect_emotions(video_path)
-                gaze = gaze_detection(video_path)               
+    cwd = os.getcwd()
+    video_file = os.path.join(cwd, 'database', 'videos', 'recorded_video.webm')
+    emotions = detect_emotions(video_file)
+    gaze = gaze_detection(video_file)               
 
     response = {
         'message': 'Emotions and Gaze tracking detected successfully',
@@ -108,12 +105,10 @@ def detect():
 # Handle GET request to  transcribe recorded video and return extracted text from video .
 @app.route('/transcribeVideo', methods=['GET'])
 def transcribeVideo():
-    database_path = 'database/videos/recorded_video.webm'
     cwd = os.getcwd()
-    video_file = os.path.join(cwd,database_path)
+    video_file = os.path.join(cwd, 'database', 'videos', 'recorded_video.webm')
     transcriptions = []  # Store transcriptions in a list
     transcribe = video_transcribe(video_file)
-    print(video_file)
     transcriptions.append(transcribe)
     print(transcriptions, "trans")
     response = {

@@ -7,6 +7,10 @@ import Image from "next/image";
 import { useAppContext } from '../../context/AppContext';
 const jsonData = [
   {
+    title: "Machine learning engineer",
+    description: "Interview Of ML Engineer",
+  },
+  {
     title: "Backend Developer",
     description: "Interview Of Backend Developer",
   },
@@ -83,28 +87,11 @@ const InterviewCards = () => {
       console.error("Error:", error);
     }
   };
-  const fetchTranscribeData = async () => {
-    try {
-        const response = await fetch("http://localhost:5000/transcribeVideo", {
-            method: "GET",
-        });
-
-        if (!response.ok) {
-            throw new Error("Request failed");
-        }
-         else 
-           console.log("response successful")
-        const data = await response.json();
-        console.log(data,"transcribed data"); // Array of transcriptions
-    } catch (error) {
-        console.error("Error:", error);
-    } 
-};
+ 
 
   return (
     <div className=" mb-4">
       <div className="mb-12 w-[300px] mx-auto">
-        {/* <button className="bg-green-500 text-black p-2 mb-4" onClick={fetchTranscribeData}>Fetch transcribe Data</button> */}
         <div className="relative">
           <input
             type="text"

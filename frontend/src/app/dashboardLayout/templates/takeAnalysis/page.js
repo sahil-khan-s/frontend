@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder ,unregister } from "react-media-recorder";
+import { useReactMediaRecorder  } from "react-media-recorder";
 import EmotionModal from "./modal";
 import { useAppContext } from '../../../context/AppContext';
 import { CircularProgress , Typography} from "@mui/material";
@@ -65,7 +65,6 @@ function Page() {
       const data = await response.json();
       const gazeData = JSON.parse(data.gaze_tracking);
       const emotionsData = JSON.parse(data.emotions);
-      console.log(data , "ddd");
       setEmotionsData(emotionsData);
       SetGazeData(gazeData); // Set gazeData state
     } catch (error) {
@@ -75,7 +74,23 @@ function Page() {
       setOpenModal(true);
     }
   };
+  const fetchTranscribeData = async () => {
+    try {
+        const response = await fetch("http://localhost:5000/transcribeVideo", {
+            method: "GET",
+        });
 
+        if (!response.ok) {
+            throw new Error("Request failed");
+        }
+         else 
+           console.log("response successful")
+        const data = await response.json();
+        // console.log(data,"transcribed data"); // Array of transcriptions
+    } catch (error) {
+        console.error("Error:", error);
+    } 
+};
   const handleSend = async () => {
     if (!mediaBlobUrl) {
       console.error("No recorded video to send.");
@@ -115,7 +130,7 @@ function Page() {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const questionArray = contextQuestions.questions; // Ensure it's an array
-  
+ 
   const playQuestion = () => {
     if (questionArray && currentQuestionIndex >= 0 && currentQuestionIndex < questionArray.length) {
       speech.text = questionArray[currentQuestionIndex];
@@ -164,8 +179,7 @@ function Page() {
       <div className=" max-w-[800px]">
       <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
       <p className="text-[16px] max-w-[700px]">{questionArray[currentQuestionIndex]}</p>
-
-      <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion}>{isSpeaking ? 'Stop' : 'Next'}</button>
+      <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion }>{isSpeaking ? 'Stop' : 'Next'}</button>
     </div>
       {permissionGranted ? (
         <>
@@ -177,14 +191,16 @@ function Page() {
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
-                videoElement.play();
+                videoElement.onloadedmetadata = () => {
+                  videoElement.play().catch((error) => {
+                    console.error("Error playing video:", error);
+                  });
+                };
               }
             }}
           />
         </div>
         <div className="flex gap-4 absolute bottom-[30px] left-[45%]">
-          {/* <PauseCircleFilledRoundedIcon className="text-white" />
-          <PlayCircleFilledRoundedIcon className="text-white"/> */}
         <button className="text-white" onClick={toggleRecording}>
           {recording ? <PauseCircleFilledRoundedIcon className="text-white" /> :<PlayCircleFilledRoundedIcon className="text-white"/>}
         </button>
@@ -230,7 +246,7 @@ function Page() {
               </button>
             )}
           </div>
-
+           <button className="bg-red-500 mb-5" onClick={fetchTranscribeData}>transcribed</button>
           {openModal && (
             <EmotionModal
               open={openModal}
