@@ -120,6 +120,19 @@ def transcribeVideo():
 
 
 
+# Recives question one by one from frontend 
+@app.route('/receiveQuestion', methods=['POST'])
+def receiveQuestion():
+    try:
+        data = request.get_json()
+        question = data.get('question')
+        print("Received Question:", question)  # Print the received question
+        return jsonify({"message": "Question received successfully"})
+    except Exception as e:
+        print("Error:", str(e))
+        return jsonify({"error": "An error occurred"})
+
+
 # Register the api_bp Blueprint
 app.register_blueprint(api_bp, url_prefix='/api')
 app.register_blueprint(auth_bp, url_prefix='/auth')
