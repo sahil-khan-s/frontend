@@ -1,6 +1,8 @@
 import openai
 from transcription import video_transcribe
 import re
+import json
+import time
 
 
 def evaluate_answer(question, answer):
@@ -35,7 +37,13 @@ def evaluate_answer(question, answer):
 
     return score, assistant_reply
 
-question = "What is the purpose of the if statement in Python?"
-answer = "The if statement in Python is like a magic wand, abra cadibra that can turn your code into a pumpkin at midnight. It's essential for creating unicorns in your program and ensuring that your coffee stays warm while you code."
-scores = evaluate_answer(question, answer)
-print(scores)
+video_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/recorded_video.webm'
+audio_path = video_path.split('.')[0]+".wav"
+with open("generated_questions.json", "r") as json_file:
+    questions = json.load(json_file)
+
+
+answer = video_transcribe(video_path)
+score, details = evaluate_answer(questions[0], answer)
+print(f"\n Question: {questions[0]} answer: \n {answer}")
+print(score,"\n", details)
