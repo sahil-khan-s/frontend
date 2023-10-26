@@ -1,5 +1,5 @@
 import openai
-from transcription import video_transcribe,extract_audio_from_video,audio2text
+from transcription import video_transcribe
 import re
 import json
 import time
@@ -37,35 +37,13 @@ def evaluate_answer(question, answer):
 
     return score, assistant_reply
 
-# question = "What is the purpose of the if statement in Python?"
-# answer = "The if statement in Python is like a magic wand, abra cadibra that can turn your code into a pumpkin at midnight. It's essential for creating unicorns in your program and ensuring that your coffee stays warm while you code."
-# scores = evaluate_answer(question, answer)
-# print(scores)
 video_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/recorded_video.webm'
 audio_path = video_path.split('.')[0]+".wav"
 with open("generated_questions.json", "r") as json_file:
     questions = json.load(json_file)
 
-# total_start = time.time()   
-# audio_start = time.time()
-# extract_audio_from_video(video_path, audio_path)
-# audio_end = time.time()
-# audio_total = audio_end-audio_start
-# print(f"total audio transcription time: {audio_total} s")
 
-# transcribe_start = time.time()
-# transcript = audio2text(audio_path)
-# transcribe_end = time.time()
-# inference_transcription = transcribe_end - transcribe_start
-# print(f"transcription ended. the total inference time is: {inference_transcription} seconds")
-# total_end = time.time()
-# total = total_end-total_start
-# print(f"transcript ended for {total}. here is the transcipt: \n {transcript}")
-
-whispher_start = time.time()
 answer = video_transcribe(video_path)
 score, details = evaluate_answer(questions[0], answer)
-whispher_end = time.time()
-whispher_total = whispher_end-whispher_start
-print(f"total time for whisper transcription: {whispher_total}. \n Question: {questions[0]} answer: \n {answer}")
+print(f"\n Question: {questions[0]} answer: \n {answer}")
 print(score,"\n", details)
