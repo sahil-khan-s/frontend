@@ -1,5 +1,0 @@
-Audio extracted successfully.
-total audio transcription time: 0.3944814205169678 s
-transcription ended. the total inference time is: 29.9443576335907 seconds
-transcript ended for 30.338887214660645. here is the transcipt: 
- I don't have a lot of experience in implement in marketing strategies for new products but when you are launching a new product you have to first study it complete your experience with the technicalities in everything and then you go to relevant people to check whether you can present to the concerned people and to make the success of your strategy you have to look for the results for the immediate there is some failure you come back to your strategy and change it

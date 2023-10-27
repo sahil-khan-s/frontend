@@ -7,6 +7,7 @@ from api import api_bp
 from auth import auth_bp
 from question_gen import generate_questions
 from transcription import video_transcribe
+from validation import evaluate_answer
 import sqlite3
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ app.secret_key = 'your_secret_key'
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'database', 'videos')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+global_question = ""
 
 # Initialize the SQLite database connection
 @app.before_request
@@ -101,6 +102,23 @@ def detect():
     return jsonify(response)
 
 
+# Recives question one by one from frontend 
+@app.route('/receiveQuestion', methods=['POST'])
+def receiveQuestion():
+    try:
+        data = request.get_json()
+        question = data.get('question')
+
+        global global_question
+        global_question = question
+
+        print("Received Question:", question)  # Print the received question
+        return jsonify({"message": "Question received successfully"})
+    except Exception as e:
+        print("Error:", str(e))
+        return jsonify({"error": "An error occurred"})
+
+
 
 # Handle GET request to  transcribe recorded video and return extracted text from video .
 @app.route('/transcribeVideo', methods=['GET'])
@@ -110,27 +128,15 @@ def transcribeVideo():
     transcriptions = []  # Store transcriptions in a list
     transcribe = video_transcribe(video_file)
     transcriptions.append(transcribe)
-    print(transcriptions, "trans")
+
+    result = evaluate_answer(global_question, transcriptions)
+
+    print(result, "validation result")
     response = {
-        'message': 'Transcribed successfully',
-        'transcriptions': transcriptions,  # Include the list of transcriptions
+        'message': 'validation successfully',
+        'validation': result,  # Include the list of transcriptions
     }
     return jsonify(response)
-
-
-
-
-# Recives question one by one from frontend 
-@app.route('/receiveQuestion', methods=['POST'])
-def receiveQuestion():
-    try:
-        data = request.get_json()
-        question = data.get('question')
-        print("Received Question:", question)  # Print the received question
-        return jsonify({"message": "Question received successfully"})
-    except Exception as e:
-        print("Error:", str(e))
-        return jsonify({"error": "An error occurred"})
 
 
 # Register the api_bp Blueprint

@@ -37,13 +37,13 @@ def evaluate_answer(question, answer):
 
     return score, assistant_reply
 
-video_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/recorded_video.webm'
-audio_path = video_path.split('.')[0]+".wav"
-with open("generated_questions.json", "r") as json_file:
-    questions = json.load(json_file)
+# video_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/recorded_video.webm'
+# audio_path = video_path.split('.')[0]+".wav"
+# with open("generated_questions.json", "r") as json_file:
+#     questions = json.load(json_file)
 
 
-answer = video_transcribe(video_path)
-score, details = evaluate_answer(questions[0], answer)
-print(f"\n Question: {questions[0]} answer: \n {answer}")
-print(score,"\n", details)
+# answer = video_transcribe(video_path)
+# score, details = evaluate_answer(questions[0], answer)
+# print(f"\n Question: {questions[0]} answer: \n {answer}")
+# print(score,"\n", details)
