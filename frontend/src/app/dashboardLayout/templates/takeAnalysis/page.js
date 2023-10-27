@@ -268,6 +268,7 @@ function Page() {
                 onClick={()=>{
                   handleSend()
                   sendQuestionToBackend()
+                  fetchTranscribeData()
                 }}
                 disabled={loading}
                 className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
@@ -278,7 +279,7 @@ function Page() {
           </div>
 
 
-           <button className="bg-red-600 mb-5 p-2" onClick={fetchTranscribeData}>fetchTranscribeData</button>
+           {/* <button className="bg-red-600 mb-5 p-2" onClick={fetchTranscribeData}>fetchTranscribeData</button> */}
 
            
           {openModal && (
