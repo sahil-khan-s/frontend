@@ -87,7 +87,7 @@ function Page() {
          else 
            console.log("response successful")
         const data = await response.json();
-        // console.log(data,"transcribed data"); // Array of transcriptions
+        console.log(data,"transcribed data"); // Array of transcriptions
     } catch (error) {
         console.error("Error:", error);
     } 
@@ -278,7 +278,7 @@ function Page() {
           </div>
 
 
-           {/* <button className="bg-red-500 mb-5 p-2" onClick={fetchTranscribeData}>fetchTranscribeData</button> */}
+           <button className="bg-red-600 mb-5 p-2" onClick={fetchTranscribeData}>fetchTranscribeData</button>
 
            
           {openModal && (
