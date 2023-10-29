@@ -18,7 +18,7 @@ const Dropdown = () => {
   };
 
   return (
-    <div className=' h-[170px] w-[630px] rounded-lg pt-8 shadow'>
+    <div className=' h-[188px] w-[630px] rounded-lg  pt-8 shadow'>
       <p className='text-start px-10 text-xl font-bold'>
         Hi, I want to become a {""}
         <select className='text-green-600 text-center bg-transparent ' value={selectedOption} onChange={handleOptionChange}>
@@ -31,8 +31,8 @@ const Dropdown = () => {
         {""} can you help me prepare?
       </p>
       {/* <Link href="/dashboardLayout/templates/takeAnalysis"> */}
-      <div className='flex justify-center mt-5'>
-      <button className='practicenow rounded-lg py-2 px-4'>
+      <div className='flex justify-center mt-5  '>
+      <button className='practicenow rounded-lg py-2 px-24 '>
         Click Here <span className='font-medium px-2 text-2xl'>+</span>
       </button>
       </div>

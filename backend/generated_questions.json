@@ -1,7 +1,7 @@
 [
-    "1. Can you describe your experience working with backend technologies such as databases, server-side frameworks, and APIs?",
-    "2. How do you ensure the security and scalability of a backend system? Can you provide an example of a project where you implemented these measures?",
-    "3. Have you ever encountered a performance issue in a backend system? How did you identify and resolve it?",
-    "4. Can you explain the process you follow when designing and implementing a new backend feature or functionality?",
-    "5. How do you stay updated with the latest trends and advancements in backend development? Can you share any specific resources or communities you rely on for learning?"
+    "1. Can you explain the difference between supervised and unsupervised learning algorithms? Give an example of each and explain how they can be applied in real-world scenarios.",
+    "2. How do you approach feature selection and engineering in machine learning projects? Can you provide examples of techniques you have used to improve model performance?",
+    "3. Can you describe a complex machine learning project you have worked on in the past? What were the challenges you faced and how did you overcome them?",
+    "4. How do you evaluate the performance of a machine learning model? What metrics do you consider and why?",
+    "5. Can you explain the concept of bias and variance in machine learning models? How do you address these issues to ensure optimal model performance?"
 ]

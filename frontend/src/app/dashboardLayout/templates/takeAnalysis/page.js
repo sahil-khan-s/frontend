@@ -260,8 +260,8 @@ function Page() {
           )}
           <div className="flex justify-center pt-4 pb-5 ">
             {loading ? ( // Display loader while loading is true
-             <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
-                <CircularProgress style={{height:"100px" , width:"100px" , color :"blue"}}  />
+             <div className="p-4 mt-6 text-center  absolute top-[40%] left-[40%]">
+                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
              </div>
             ) : (
               <button
