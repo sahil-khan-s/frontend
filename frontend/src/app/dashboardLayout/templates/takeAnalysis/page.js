@@ -168,7 +168,7 @@ function Page() {
   };
 
   if (!questionArray || questionArray.length === 0) {
-    return <p>Loading questions.....</p>;
+    return <p className="text-center">Loading questions.....</p>;
   }
   const toggleRecording = () => {
     if (recording) {
@@ -204,18 +204,18 @@ function Page() {
   
   return (
     <div className=" ">
-      <div className=" max-w-[800px]">
-      <h2 className="font-bold py-2 text-xl ">Question {currentQuestionIndex + 1}</h2>
+      <div className=" w-[700px] mx-auto">
+      <h2 className="font-bold py-2 text-xl text-start ">Question {currentQuestionIndex + 1}</h2>
       <p className="text-[16px] max-w-[700px]">{questionArray[currentQuestionIndex]}</p>
       <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion }>{isSpeaking ? 'Stop' : 'Next'}</button>
     </div>
       {permissionGranted ? (
         <>
         <div className="relative">
-        <div className="">
+        <div className=" flex flex-col items-center ">
           <h1 className="font-medium  capitalize">Status : {status}</h1>
           <video
-            className=" pb-4 w-[700px] rounded-xl rounded-b-xl"
+            className="  pb-4 w-[700px] rounded-xl rounded-b-xl"
             ref={(videoElement) => {
               if (videoElement && videoStream) {
                 videoElement.srcObject = videoStream;
@@ -228,9 +228,9 @@ function Page() {
             }}
           />
         </div>
-        <div className="flex gap-4 absolute bottom-[30px] left-[45%]">
+        <div className="flex gap-4 absolute bottom-[30px] left-[48%]">
         <button className="text-white" onClick={toggleRecording}>
-          {recording ? <PauseCircleFilledRoundedIcon className="text-white" /> :<PlayCircleFilledRoundedIcon className="text-white"/>}
+          {recording ? <PauseCircleFilledRoundedIcon className="text-white text-[40px]" /> :<PlayCircleFilledRoundedIcon className=" text-red-700 text-[40px]"/>}
         </button>
          </div>
         </div>
@@ -260,8 +260,8 @@ function Page() {
           )}
           <div className="flex justify-center pt-4 pb-5 ">
             {loading ? ( // Display loader while loading is true
-             <div className="p-4 mt-6 text-center  absolute top-[30%] left-[50%]">
-                <CircularProgress style={{height:"100px" , width:"100px" , color :"blue"}}  />
+             <div className="p-4 mt-6 text-center  absolute top-[40%] left-[40%]">
+                <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
              </div>
             ) : (
               <button

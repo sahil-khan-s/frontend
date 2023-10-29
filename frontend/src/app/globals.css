@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 .custom-drawer-paper {
-    /* Add your styles here, including background color */
-    background: linear-gradient(
-  45deg,
-  #f5f0f0,
-  #a8a8fd,
-  #ede5ec,
-  #c5def2,
-  #efeff1,
-  #eeeff1,
-  #ededf7
-);
+  background: linear-gradient(
+    45deg,
+    #f5f0f0,
+    #a8a8fd,
+    #ede5ec,
+    #c5def2,
+    #efeff1,
+    #eeeff1,
+    #ededf7
+  );
+  }
+
+
+  .background-gradient{
 
   }
+
   
 .gradient {
     /* Add your styles here, including background color */
@@ -40,16 +44,18 @@
     #5889e5,
     #7353d2,
     #9442f9
-  );
+    );
+
 }
 
+.shadow{
+  box-shadow: 10px 0px 20px #525256;
+}
 
-/* .background{
-  background: linear-gradient(
-    45deg,
-    #a2a2ef,
-    #797ba5,
-    #808177
-  );
- 
-} */
+.practicenow {
+  background-color: #a8a8ae;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
