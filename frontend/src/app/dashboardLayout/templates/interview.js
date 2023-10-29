@@ -91,14 +91,14 @@ const InterviewCards = () => {
 
   return (
     <div className=" mb-4">
-      <div className="mb-12 w-[300px] mx-auto">
+      <div className="mb-12 w-[300px] mx-auto ">
         <div className="relative">
           <input
             type="text"
             placeholder="Search Templates"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400"
+            className="w-full pl-10 p-2 border-4  rounded-md focus:outline-none focus:ring focus:border-blue-400"
           />
           <div className="absolute inset-y-0 right-6 flex items-center  pointer-events-none">
             <Image
@@ -113,7 +113,7 @@ const InterviewCards = () => {
 
       <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 pl-10 ">
         {filteredData.map((item, index) => (
-          <div key={index} className="card p-3">
+          <div key={index} className="card p-3 ">
             <h2 className="font-bold text-2xl">{item.title}</h2>
             <p className="py-5 text-blue-800">{item.description}</p>
             <Link href="/dashboardLayout/templates/takeAnalysis">
@@ -140,7 +140,7 @@ const InterviewCards = () => {
           padding: 20px;
           margin: 10px;
           border-radius: 5px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 30px 0px 20px #999999;
           width: 300px;
           display: flex;
           flex-direction: column;

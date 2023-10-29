@@ -168,7 +168,7 @@ function Page() {
   };
 
   if (!questionArray || questionArray.length === 0) {
-    return <p>Loading questions.....</p>;
+    return <p className="text-center">Loading questions.....</p>;
   }
   const toggleRecording = () => {
     if (recording) {

@@ -69,7 +69,7 @@ const Sidebar = () => {
             {open ? (
               <>
                 <div className="flex space-x-4 mt-10 px-10 py-5 items-center">
-                  <DashboardIcon fontSize="large" />
+                  <DashboardIcon fontSize="large" className="" />
                   <Typography variant="body1">Dashboard</Typography>
                 </div>
               </>
