@@ -7,10 +7,6 @@ import Image from "next/image";
 import { useAppContext } from '../../context/AppContext';
 const jsonData = [
   {
-    title: "Machine learning engineer",
-    description: "Interview Of ML Engineer",
-  },
-  {
     title: "Backend Developer",
     description: "Interview Of Backend Developer",
   },
@@ -21,6 +17,10 @@ const jsonData = [
   {
     title: "Frontend Developer",
     description: "Interview Of Frontend Developer",
+  },
+  {
+    title: "Machine learning engineer",
+    description: "Interview Of ML Engineer",
   },
   {
     title: "Graphics Officer",
@@ -111,9 +111,9 @@ const InterviewCards = () => {
         </div>
       </div>
 
-      <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 gap-4">
+      <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 pl-10 ">
         {filteredData.map((item, index) => (
-          <div key={index} className="card">
+          <div key={index} className="card p-3">
             <h2 className="font-bold text-2xl">{item.title}</h2>
             <p className="py-5 text-blue-800">{item.description}</p>
             <Link href="/dashboardLayout/templates/takeAnalysis">

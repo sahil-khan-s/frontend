@@ -64,7 +64,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <Link href="/dashboardLayout/dashboard">
+        <Link href="/dashboardLayout">
           <h1 className="hover:bg-blue-300 ">
             {open ? (
               <>
