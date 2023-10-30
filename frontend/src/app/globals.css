@@ -3,21 +3,18 @@
 @tailwind utilities;
 
 .custom-drawer-paper {
-  background: linear-gradient(
-    45deg,
-    #f5f0f0,
-    #a8a8fd,
-    #ede5ec,
-    #c5def2,
-    #efeff1,
-    #eeeff1,
-    #ededf7
-  );
+  background: #56CCF2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
   }
 
 
   .background-gradient{
-
+    background: #c9b59e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #9e93f1, #799bda);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #41403d, #403a36); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+       
   }
 
   
@@ -59,3 +56,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.modal{
+  background: #283c86;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   }

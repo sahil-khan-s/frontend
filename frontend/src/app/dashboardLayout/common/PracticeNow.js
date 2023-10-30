@@ -18,10 +18,10 @@ const Dropdown = () => {
   };
 
   return (
-    <div className=' h-[188px] w-[630px] rounded-lg  pt-8 shadow'>
-      <p className='text-start px-10 text-xl font-bold'>
+    <div className='custom-drawer-paper h-[188px] w-[630px] rounded-lg  pt-8 shadow'>
+      <p className='text-start px-10 text-xl text-white font-bold'>
         Hi, I want to become a {""}
-        <select className='text-green-600 text-center bg-transparent ' value={selectedOption} onChange={handleOptionChange}>
+        <select className='text-green-900 text-center bg-transparent ' value={selectedOption} onChange={handleOptionChange}>
           {options.map((option) => (
             <option className='' key={option} value={option}>
               {option}
@@ -32,7 +32,7 @@ const Dropdown = () => {
       </p>
       {/* <Link href="/dashboardLayout/templates/takeAnalysis"> */}
       <div className='flex justify-center mt-5  '>
-      <button className='practicenow rounded-lg py-2 px-24 '>
+      <button className='custom-drawer-paper text-white font-bold border-2 rounded-lg py-2 px-24 '>
         Click Here <span className='font-medium px-2 text-2xl'>+</span>
       </button>
       </div>

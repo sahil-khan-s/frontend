@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
           <div className=" ">
             <Sidebar />
           </div>
-          <div className="  w-[100%] sticky background-gradient">
+          <div className="  w-[100%]  background-gradient">
             <div
               className=" w-[100%]   min-h-screen"
               style={{ height: "100%" }}

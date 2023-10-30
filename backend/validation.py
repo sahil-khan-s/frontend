@@ -35,7 +35,7 @@ def evaluate_answer(question, answer):
     match = re.search(pattern, assistant_reply)
     score = match.group(1)
 
-    return score, assistant_reply
+    return score
 
 # video_path = '/home/devsortpc/Desktop/Interview_buddy/web-site-development/backend/database/videos/recorded_video.webm'
 # audio_path = video_path.split('.')[0]+".wav"

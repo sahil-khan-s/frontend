@@ -13,6 +13,7 @@ function Page() {
   useReactMediaRecorder({ video: true });
   const [loading, setLoading] = useState(false);
   const [emotionsData, setEmotionsData] = useState(null);
+  const [validateResult, setValidateResult] = useState(null);
   const [gazeData, SetGazeData] = useState(null);
   const { contextQuestions } = useAppContext();
   const [recording, setRecording] = useState(true);
@@ -87,7 +88,9 @@ function Page() {
          else 
            console.log("response successful")
         const data = await response.json();
-        console.log(data,"transcribed data"); // Array of transcriptions
+        const validatedData = JSON.parse(data.validation)
+        setValidateResult(validatedData)
+        // console.log(data,"transcribed data"); // Array of transcriptions
     } catch (error) {
         console.error("Error:", error);
     } 
@@ -288,6 +291,7 @@ function Page() {
               onClose={() => setOpenModal(false)}
               emotionsData={emotionsData}
               gazeData={gazeData}
+              validateResult={validateResult}
             />
           )}
         </>

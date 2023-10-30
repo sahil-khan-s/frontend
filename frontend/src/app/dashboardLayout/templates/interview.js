@@ -92,7 +92,7 @@ const InterviewCards = () => {
   return (
     <div className=" mb-4">
       <div className="mb-12 w-[300px] mx-auto ">
-        <div className="relative">
+        <div className="relative ">
           <input
             type="text"
             placeholder="Search Templates"
@@ -113,7 +113,7 @@ const InterviewCards = () => {
 
       <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 pl-10 ">
         {filteredData.map((item, index) => (
-          <div key={index} className="card p-3 ">
+          <div key={index} className="custom-drawer-paper card p-3 ">
             <h2 className="font-bold text-2xl">{item.title}</h2>
             <p className="py-5 text-blue-800">{item.description}</p>
             <Link href="/dashboardLayout/templates/takeAnalysis">
