@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className=" ">
         <div className="">
-          <h1 className="pt-10 text-3xl text-center font-bold ">Templates</h1>
+          <h1 className="pt-10 text-3xl text-center font-bold text-white">Templates</h1>
           <div className="mt-16 w-[620px] mx-auto">
             <PracticeNow />
           </div>

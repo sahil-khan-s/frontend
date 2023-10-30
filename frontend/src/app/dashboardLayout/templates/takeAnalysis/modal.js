@@ -8,7 +8,7 @@ function EmotionModal({ open, onClose, emotionsData, gazeData , validateResult }
     <div className="  ">
         
       <Modal
-      className="modal "
+      className="custom-drawer-paper "
         style={{
           display: "grid",
           gridTemplateColumns: "1fr",

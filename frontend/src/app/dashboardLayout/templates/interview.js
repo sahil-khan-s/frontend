@@ -114,13 +114,13 @@ const InterviewCards = () => {
       <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 pl-10 ">
         {filteredData.map((item, index) => (
           <div key={index} className="custom-drawer-paper card p-3 ">
-            <h2 className="font-bold text-2xl">{item.title}</h2>
-            <p className="py-5 text-blue-800">{item.description}</p>
+            <h2 className="font-bold text-white text-2xl">{item.title}</h2>
+            <p className="py-5 text-white">{item.description}</p>
             <Link href="/dashboardLayout/templates/takeAnalysis">
             <div>
               <button
                 onClick={() => handleSendTitle(item.title)}
-                className="practice"
+                className="practice modal"
               >
                 Practice Now
               </button>
@@ -140,7 +140,7 @@ const InterviewCards = () => {
           padding: 20px;
           margin: 10px;
           border-radius: 5px;
-          box-shadow: 30px 0px 20px #999999;
+          box-shadow: 20px 10px 20px white;
           width: 300px;
           display: flex;
           flex-direction: column;

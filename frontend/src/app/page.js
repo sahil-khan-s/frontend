@@ -15,7 +15,7 @@ export default function Home() {
         title="Supercharge Your Interview Skills"
         subTitle="Unlock Opportunities"
       />
-      <div className=" bg-gray-800 opacity-[0.9] h-[400px]">
+      <div className="layout opacity-[0.9] h-[400px]">
         <div className="  mx-auto container 2xl:max-w-container xl:px-[128px]">
           <div className="flex py-16 items-center justify-center">
           <div className=" max-w-[900px]  ">
@@ -26,7 +26,7 @@ export default function Home() {
             
             <div className="  mt-5 flex justify-center mx-auto">
               <Link href="/login">
-             <button className="  gradient-text py-4 font-bold px-14 text-white rounded-full">Try Our Service</button>
+             <button className=" layout border border-white py-4 font-bold px-14 text-white rounded-full">Try Our Service</button>
              </Link>
             </div>
             

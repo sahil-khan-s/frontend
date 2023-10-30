@@ -8,12 +8,18 @@
   background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
   }
+.layout {
+  background: #56CCF2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
 
 
   .background-gradient{
     background: #c9b59e;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #9e93f1, #799bda);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #41403d, #403a36); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #bcbaca, #acafb6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #d6d4d0, #5c5653); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
        
   }
 
@@ -46,7 +52,7 @@
 }
 
 .shadow{
-  box-shadow: 10px 0px 20px #525256;
+  box-shadow: 10px 13px 13px white;
 }
 
 .practicenow {
@@ -61,4 +67,10 @@
   background: #283c86;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   }
+
+   .attachment{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
    }

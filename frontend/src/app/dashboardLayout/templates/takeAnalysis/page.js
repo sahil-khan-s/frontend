@@ -171,7 +171,7 @@ function Page() {
   };
 
   if (!questionArray || questionArray.length === 0) {
-    return <p className="text-center">Loading questions.....</p>;
+    return <p className="text-center text-white mt-4">Loading questions.....</p>;
   }
   const toggleRecording = () => {
     if (recording) {
@@ -208,15 +208,18 @@ function Page() {
   return (
     <div className=" ">
       <div className=" w-[700px] mx-auto">
-      <h2 className="font-bold py-2 text-xl text-start ">Question {currentQuestionIndex + 1}</h2>
-      <p className="text-[16px] max-w-[700px]">{questionArray[currentQuestionIndex]}</p>
-      <button className="px-10 rounded-lg text-white my-1 py-1 bg-gray-400" onClick={handleNextQuestion }>{isSpeaking ? 'Stop' : 'Next'}</button>
+      <h2 className="font-bold py-2 text-xl text-start text-white">Question {currentQuestionIndex + 1}</h2>
+      <p className="text-[16px] max-w-[700px] text-white font-medium">{questionArray[currentQuestionIndex]}</p>
+      <button className="px-10 rounded-lg text-white my-1 py-1 custom-drawer-paper" onClick={handleNextQuestion }>{isSpeaking ? 'Stop' : 'Next'}</button>
     </div>
       {permissionGranted ? (
         <>
         <div className="relative">
+          <div>
+            
+          </div>
         <div className=" flex flex-col items-center ">
-          <h1 className="font-medium  capitalize">Status : {status}</h1>
+          <h1 className="font-medium  capitalize text-white">Status : {status}</h1>
           <video
             className="  pb-4 w-[700px] rounded-xl rounded-b-xl"
             ref={(videoElement) => {
@@ -242,7 +245,7 @@ function Page() {
             {status !== "recording"  ? (
               <button
                 onClick={startRecording}
-                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
+                className=" custom-drawer-paper hover:bg-blue-700 text-white font-bold py-2 px-36 rounded-full"
               >
                 Start Recording
               </button>
@@ -258,12 +261,12 @@ function Page() {
 
           {mediaBlobUrl && (
             <div>
-              <p className="text-center pt-2">Submit Recorded Video:</p>
+              <p className="text-center pt-2 text-white">Submit Recorded Video:</p>
             </div>
           )}
           <div className="flex justify-center pt-4 pb-5 ">
             {loading ? ( // Display loader while loading is true
-             <div className="p-4 mt-6 text-center  absolute top-[40%] left-[40%]">
+             <div className="p-4 mt-6 text-center  absolute top-[50%] left-[50%]">
                 <CircularProgress style={{height:"100px" , width:"100px" , color :"white"}}  />
              </div>
             ) : (
@@ -274,7 +277,7 @@ function Page() {
                   fetchTranscribeData()
                 }}
                 disabled={loading}
-                className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
+                className={`modal hover:bg-green-700 text-white font-bold py-2 cursor-pointer px-24 rounded-full`}
               >
                 Submit
               </button>
