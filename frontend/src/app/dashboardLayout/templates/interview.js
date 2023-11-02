@@ -111,7 +111,7 @@ const InterviewCards = () => {
         </div>
       </div>
 
-      <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 pl-10 ">
+      <div className=" grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 py-3 pl-10 gap-y-5">
         {filteredData.map((item, index) => (
           <div key={index} className="custom-drawer-paper card p-3 ">
             <h2 className="font-bold text-white text-2xl">{item.title}</h2>
