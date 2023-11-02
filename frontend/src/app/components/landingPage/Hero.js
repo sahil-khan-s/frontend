@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Interview from "../../../../public/assets/images/interview.jpg";
-import MasterArt from "@/app/components/common/masterArt";
+import MasterArt from "../common/MasterArt";
 function Hero() {
   return (
     <div className="layout   pb-12">
