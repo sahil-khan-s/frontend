@@ -11,7 +11,7 @@ function Hero() {
           <div>
           <MasterArt
             className=""
-            className2="text-white layout rounded-tl-[40px] rounded-br-[40px] py-5 text-[40px] font-bold"
+            className2="text-white  rounded-tl-[40px] rounded-br-[40px] py-5 text-[40px] font-bold"
             className3="text-white  pt-5"
             title="Elevate Your Interviews with Interview Buddy"
             discription=" Unlock the power of Interview Buddy, your trusted companion for

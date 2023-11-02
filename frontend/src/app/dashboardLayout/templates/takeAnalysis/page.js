@@ -47,8 +47,8 @@ function Page() {
     };
   }, []);
   
-  const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(''));
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  // const [speech, setSpeech] = useState(new SpeechSynthesisUtterance(''));
+  // const [isSpeaking, setIsSpeaking] = useState(false);
   // Function to fetch emotions data
   const [openModal, setOpenModal] = useState(false);
 
@@ -132,86 +132,86 @@ function Page() {
   };
  
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const questionArray = contextQuestions.questions; // Ensure it's an array
+  // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  // const questionArray = contextQuestions.questions; // Ensure it's an array
 
 
-  const playQuestion = () => {
-    if (questionArray && currentQuestionIndex >= 0 && currentQuestionIndex < questionArray.length) {
-      speech.text = questionArray[currentQuestionIndex];
-      window.speechSynthesis.speak(speech);
-      setSendQuestion( questionArray[currentQuestionIndex]);
-      setIsSpeaking(true);
-    }
-  };
+  // const playQuestion = () => {
+  //   if (questionArray && currentQuestionIndex >= 0 && currentQuestionIndex < questionArray.length) {
+  //     speech.text = questionArray[currentQuestionIndex];
+  //     window.speechSynthesis.speak(speech);
+  //     setSendQuestion( questionArray[currentQuestionIndex]);
+  //     setIsSpeaking(true);
+  //   }
+  // };
 
 
-  const stopSpeaking = () => {
-    window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-  };
+  // const stopSpeaking = () => {
+  //   window.speechSynthesis.cancel();
+  //   setIsSpeaking(false);
+  // };
 
-  useEffect(() => {
-    if (!isSpeaking) {
-      playQuestion();
-    }
-  }, [currentQuestionIndex, questionArray, speech]);
+  // useEffect(() => {
+  //   if (!isSpeaking) {
+  //     playQuestion();
+  //   }
+  // }, [currentQuestionIndex, questionArray, speech]);
 
-  const handleNextQuestion = () => {
-    if (isSpeaking) {
-      // Stop speaking if currently speaking
-      stopSpeaking();
-    } else
-     {
-      if (currentQuestionIndex < questionArray.length - 1) {
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      } else {
-      }
-    }
-  };
+  // const handleNextQuestion = () => {
+  //   if (isSpeaking) {
+  //     // Stop speaking if currently speaking
+  //     stopSpeaking();
+  //   } else
+  //    {
+  //     if (currentQuestionIndex < questionArray.length - 1) {
+  //       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  //     } else {
+  //     }
+  //   }
+  // };
 
-  if (!questionArray || questionArray.length === 0) {
-    return <p className="text-center text-white mt-4">Loading questions.....</p>;
-  }
-  const toggleRecording = () => {
-    if (recording) {
-      pauseRecording();
-    } else {
-      resumeRecording();
-    }
-    setRecording(!recording);
-  };
+  // if (!questionArray || questionArray.length === 0) {
+  //   return <p className="text-center text-white mt-4">Loading questions.....</p>;
+  // }
+  // const toggleRecording = () => {
+  //   if (recording) {
+  //     pauseRecording();
+  //   } else {
+  //     resumeRecording();
+  //   }
+  //   setRecording(!recording);
+  // };
 
-  const sendQuestionToBackend = async () => {
-    try {
-      if (sendQuestion) {
-        const response = await fetch('http://localhost:5000/receiveQuestion', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ question: sendQuestion }),
-        });
+  // const sendQuestionToBackend = async () => {
+  //   try {
+  //     if (sendQuestion) {
+  //       const response = await fetch('http://localhost:5000/receiveQuestion', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({ question: sendQuestion }),
+  //       });
   
-        if (response.ok) {
-          const responseData = await response.json();
-          console.log(responseData.message); // Print the response message from the backend
-        } else {
-          throw new Error('Request failed');
-        }
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  //       if (response.ok) {
+  //         const responseData = await response.json();
+  //         console.log(responseData.message); // Print the response message from the backend
+  //       } else {
+  //         throw new Error('Request failed');
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
   
   return (
     <div className=" ">
-      <div className=" w-[700px] mx-auto">
+      {/* <div className=" w-[700px] mx-auto">
       <h2 className="font-bold py-2 text-xl text-start text-white">Question {currentQuestionIndex + 1}</h2>
       <p className="text-[16px] max-w-[700px] text-white font-medium">{questionArray[currentQuestionIndex]}</p>
       <button className="px-10 rounded-lg text-white my-1 py-1 custom-drawer-paper" onClick={handleNextQuestion }>{isSpeaking ? 'Stop' : 'Next'}</button>
-    </div>
+    </div> */}
       {permissionGranted ? (
         <>
         <div className="relative">
