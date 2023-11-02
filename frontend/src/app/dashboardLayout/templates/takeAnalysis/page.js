@@ -173,37 +173,37 @@ function Page() {
   // if (!questionArray || questionArray.length === 0) {
   //   return <p className="text-center text-white mt-4">Loading questions.....</p>;
   // }
-  // const toggleRecording = () => {
-  //   if (recording) {
-  //     pauseRecording();
-  //   } else {
-  //     resumeRecording();
-  //   }
-  //   setRecording(!recording);
-  // };
+  const toggleRecording = () => {
+    if (recording) {
+      pauseRecording();
+    } else {
+      resumeRecording();
+    }
+    setRecording(!recording);
+  };
 
-  // const sendQuestionToBackend = async () => {
-  //   try {
-  //     if (sendQuestion) {
-  //       const response = await fetch('http://localhost:5000/receiveQuestion', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ question: sendQuestion }),
-  //       });
+  const sendQuestionToBackend = async () => {
+    try {
+      if (sendQuestion) {
+        const response = await fetch('http://localhost:5000/receiveQuestion', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ question: sendQuestion }),
+        });
   
-  //       if (response.ok) {
-  //         const responseData = await response.json();
-  //         console.log(responseData.message); // Print the response message from the backend
-  //       } else {
-  //         throw new Error('Request failed');
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData.message); // Print the response message from the backend
+        } else {
+          throw new Error('Request failed');
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
   
   return (
     <div className=" ">
